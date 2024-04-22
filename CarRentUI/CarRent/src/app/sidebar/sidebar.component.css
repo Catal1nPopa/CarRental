@@ -1,0 +1,24 @@
+.sidebar {
+    background-color: #343a40;
+    padding: 20px;
+    height: 100vh;
+  }
+  
+  .sidebar ul {
+    padding-left: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar a {
+    color: #7a7a7a;
+    text-decoration: none;
+  }
+  
+  .sidebar a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+  

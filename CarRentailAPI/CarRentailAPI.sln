@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentailAPI", "CarRentailAPI.csproj", "{76045691-5FA8-4B66-BAC4-E78832EFB6EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentail.Application", "..\Application\CarRentail.Application.csproj", "{51F81554-D6EC-4E81-8EF5-E4279020B35C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentail.Domain", "..\Domain\CarRentail.Domain.csproj", "{C2C37DA5-586E-4581-9243-AA0D828BF3D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentail.Infrastructure", "..\Infrastructure\CarRentail.Infrastructure.csproj", "{86CC1C40-5CDF-41E6-86EB-DF3B2DF005CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76045691-5FA8-4B66-BAC4-E78832EFB6EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76045691-5FA8-4B66-BAC4-E78832EFB6EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76045691-5FA8-4B66-BAC4-E78832EFB6EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76045691-5FA8-4B66-BAC4-E78832EFB6EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51F81554-D6EC-4E81-8EF5-E4279020B35C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51F81554-D6EC-4E81-8EF5-E4279020B35C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F81554-D6EC-4E81-8EF5-E4279020B35C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51F81554-D6EC-4E81-8EF5-E4279020B35C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2C37DA5-586E-4581-9243-AA0D828BF3D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C37DA5-586E-4581-9243-AA0D828BF3D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C37DA5-586E-4581-9243-AA0D828BF3D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C37DA5-586E-4581-9243-AA0D828BF3D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86CC1C40-5CDF-41E6-86EB-DF3B2DF005CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86CC1C40-5CDF-41E6-86EB-DF3B2DF005CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86CC1C40-5CDF-41E6-86EB-DF3B2DF005CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86CC1C40-5CDF-41E6-86EB-DF3B2DF005CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65D60025-D3D6-4F75-B188-A886B69AD01C}
+	EndGlobalSection
+EndGlobal
