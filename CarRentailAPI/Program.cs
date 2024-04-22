@@ -1,4 +1,5 @@
 using CarRentail.Application.Adapter;
+using CarRentail.Application.Facade;
 using CarRentail.Domain.Entities;
 using CarRentail.Domain.Interface;
 using CarRentail.Infrastructure.Context;
@@ -23,6 +24,7 @@ builder.Services.AddCors(option => option.AddPolicy(name: "CarRentailAPI",
 webHostBuilder.ConfigureServices(services =>
 {
     services.AddScoped<IVehicleRepository, VehicleRepository>();
+    services.AddScoped<ICarRentalFacade, CarRentalFacade>();
     services.AddSingleton<ElectricCar>();
     services.AddSingleton<ElectricCarToMotorcycleAdapter>();
     services.AddControllers();

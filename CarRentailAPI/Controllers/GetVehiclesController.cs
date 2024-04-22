@@ -18,10 +18,10 @@ namespace CarRentailAPI.Controllers
         }
 
 
-        [HttpGet("GetAllVehicles")]
-        public List<VehicleList> GetAllVehicles()
-        {
-            return (GetVehicle.GetAllVehicle(_electricCarRepository));
-        }
+        //[HttpGet("GetAllVehicles")]
+        //public List<VehicleList> GetAllVehicles()
+        //{
+        //    return (GetVehicle.GetAllVehicle(_electricCarRepository));
+        //}
     }
 }

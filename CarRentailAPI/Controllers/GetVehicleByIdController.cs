@@ -18,18 +18,18 @@ namespace CarRentailAPI.Controllers
             _electricCarRepository = vehicleRepository;
         }
 
-        [HttpGet("GetVehicleById")]
-        public object GetVehicleById(int id, VehicleType.VehicleTypes typeVehicle)
-        {
+        //[HttpGet("GetVehicleById")]
+        //public object GetVehicleById(int id, VehicleType.VehicleTypes typeVehicle)
+        //{
 
-            var dataVehicle = GetById.GetVehicle(_electricCarRepository, id, typeVehicle);
-            if (dataVehicle == null)
-            {
-                return "Datele nu au fost gasite";
-            }
+        //    var dataVehicle = GetById.GetVehicle(_electricCarRepository, id, typeVehicle);
+        //    if (dataVehicle == null)
+        //    {
+        //        return "Datele nu au fost gasite";
+        //    }
 
-            return dataVehicle;
-        }
+        //    return dataVehicle;
+        //}
 
         
     }

@@ -17,11 +17,11 @@ namespace CarRentailAPI.Controllers
             _carRepository = vehicleRepository;
         }
 
-        [HttpDelete("DeleteVehicle")]
-        public void DeleteVehicles(int id, VehicleType.VehicleTypes types)
-        {
-            var res = DeleteVehicle.DeleteData(_carRepository, id, types);
-            //return res;
-        }
+        //[HttpDelete("DeleteVehicle")]
+        //public void DeleteVehicles(int id, VehicleType.VehicleTypes types)
+        //{
+        //    var res = DeleteVehicle.DeleteData(_carRepository, id, types);
+        //    //return res;
+        //}
     }
 }
