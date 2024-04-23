@@ -11,6 +11,7 @@ namespace CarRentail.Domain.Entities
     {
         public int Id { get; set; }
         public string Brand { get; set; }
+        public string CarNumber { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
         public int Distance { get; set; }
@@ -20,6 +21,6 @@ namespace CarRentail.Domain.Entities
         public int ElectricPower { get; set; }
         public int BatteryCapacity { get; set; }
         public bool State { get; set; }
-        public string VehicleType { get; set; }
+        //ublic string VehicleType { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace CarRentail.Domain.Interface
     {
         int Id { get; set; }
         string Brand { get; set; }
+        public string CarNumber { get; set; }
         string Model { get; set; }
         int Year { get; set; }
         int Distance { get; set; }

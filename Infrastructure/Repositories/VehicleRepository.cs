@@ -75,7 +75,7 @@ namespace CarRentail.Infrastructure.Repositories
 
         public void DeleteElectricCar(int id)
         {
-            var electriCar = GetHybridCarById(id);
+            var electriCar = GetElectricCarById(id);
             if (electriCar != null)
             {
                 _context.Remove(electriCar);
@@ -107,7 +107,7 @@ namespace CarRentail.Infrastructure.Repositories
 
         public void DeleteCombustionCar(int id)
         {
-            var combustionCar = GetHybridCarById(id);
+            var combustionCar = GetCombustionCarById(id);
             if (combustionCar != null)
             {
                 _context.Remove(combustionCar);
@@ -139,7 +139,7 @@ namespace CarRentail.Infrastructure.Repositories
 
         public void DeleteElectricMotorcycle(int id)
         {
-            var electricMotorcycle= GetHybridCarById(id);
+            var electricMotorcycle= GetElectricMotorcycleById(id);
             if (electricMotorcycle != null)
             {
                 _context.Remove(electricMotorcycle);
@@ -171,12 +171,23 @@ namespace CarRentail.Infrastructure.Repositories
 
         public void DeleteCombustionMotorcycle(int id)
         {
-            var combustionMotorcycle = GetHybridCarById(id);
+            var combustionMotorcycle = GetCombustionMotorcycleById(id);
             if (combustionMotorcycle != null)
             {
                 _context.Remove(combustionMotorcycle);
                 _context.SaveChanges();
             }
+        }
+
+        public void AddCarInspection(CarInspection carInspection)
+        {
+            _context.Add(carInspection);
+            _context.SaveChanges();
+        }
+
+        public List<CarInspection> GetAllInspections()
+        {
+            return _context.CarInspections.ToList();
         }
     }
 }

@@ -1,30 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CarRentail.Application.DBRequests;
 using CarRentail.Domain.Entities;
 using CarRentail.Domain.Enums;
 using CarRentail.Domain.Interface;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using static CarRentail.Domain.Enums.VehicleType;
 
-namespace CarRentail.Application.DBRequests
+namespace CarRentailAPI.Controllers
 {
-    public class UpdateVehicle
+    [Route("api/[controller]")]
+    [ApiController]
+    public class FacadeVehicles : ControllerBase
     {
+        private readonly ICarRentalFacade _carRentalFacade;
 
-        public static bool UpdateVehicleData(IVehicleRepository _vehicleRepository, int id, Vehicle data, VehicleType.VehicleTypes vehicleType)
+        public FacadeVehicles(ICarRentalFacade carRentalFacade)
         {
-         
-            if (id != data.Id)
-            {
-                return false;
-            }
+            _carRentalFacade = carRentalFacade;
+        }
+        
+        [HttpGet("Facade Get All")]
+        public List<VehicleList> GetVehicle()
+        {
+            return _carRentalFacade.getAllVehicles();
+        }
 
-            switch (vehicleType)
+        [HttpDelete("Facade Delete")]
+        public void DeleteVehicle(int id, VehicleType.VehicleTypes type)
+        {
+             _carRentalFacade.RemoveVehicle(id, type);
+        }
+
+        [HttpPut("Fcade Update")]
+        public bool UpdateDateVehicle(int id, Vehicle data, VehicleType.VehicleTypes vehicleTypes)
+        {
+           var res = _carRentalFacade.UpdateVehicles(id, data, vehicleTypes);
+           return res;
+        }
+
+        [HttpPost("Facade GetById")]
+        public object GetVehicleById(int id, VehicleType.VehicleTypes vehicleType)
+        {
+            var dataVehicle = _carRentalFacade.GetVehicleById(id, vehicleType);
+            if (dataVehicle != null)
+            {
+                return dataVehicle;
+            }
+            else
+            {
+                return "Datele nu au fost gasite";
+            }
+        }
+
+        [HttpPost("Facade Add Object")]
+        public void AddObject(Vehicle data, VehicleType.VehicleTypes vehicleTypes)
+        {
+            IVehicle newData;
+
+            switch (vehicleTypes)
             {
                 case VehicleType.VehicleTypes.CombustionCar:
-                    var newData = new CombustionCar
+                    newData = new CombustionCar
                     {
                         Id = data.Id,
                         Brand = data.Brand,
@@ -37,27 +73,9 @@ namespace CarRentail.Application.DBRequests
                         EnginePower = data.EnginePower,
                         State = data.State
                     };
-                    _vehicleRepository.UpdateCombustionCar(newData);
-                    
-                    break;
-                case VehicleType.VehicleTypes.CombustionMotorcycle:
-                    var comMoto = new CombustionMotorcycle
-                    {
-                        Id = data.Id,
-                        Brand = data.Brand,
-                        CarNumber = data.CarNumber,
-                        Model = data.Model,
-                        Year = data.Year,
-                        Distance = data.Distance,
-                        Photo = data.Photo,
-                        Price = data.Price,
-                        EnginePower = data.EnginePower,
-                        State = data.State
-                    };
-                    _vehicleRepository.UpdateCombustionMotorcycle(comMoto);
                     break;
                 case VehicleType.VehicleTypes.ElectricCar:
-                    var newData2 = new ElectricCar
+                    newData = new ElectricCar
                     {
                         Id = data.Id,
                         Brand = data.Brand,
@@ -71,27 +89,10 @@ namespace CarRentail.Application.DBRequests
                         BatteryCapacity = data.BatteryCapacity,
                         State = data.State
                     };
-                    _vehicleRepository.UpdateElectricCar(newData2);
                     break;
-                case VehicleType.VehicleTypes.ElectricMotorcycle:
-                    var carElec = new ElectricMotorcycle
-                    {
-                        Id = data.Id,
-                        Brand = data.Brand,
-                        CarNumber = data.CarNumber,
-                        Model = data.Model,
-                        Year = data.Year,
-                        Distance = data.Distance,
-                        Photo = data.Photo,
-                        Price = data.Price,
-                        EnginePower = data.EnginePower,
-                        BatteryCapacity = data.BatteryCapacity,
-                        State = data.State
-                    };
-                    _vehicleRepository.UpdateElectricMotorcycle(carElec);
-                    break;
-                case VehicleType.VehicleTypes.HybridCar:
-                    var hybrid = new HybridCar
+                case VehicleTypes.HybridCar:
+                    string nul;
+                    newData = new HybridCar
                     {
                         Id = data.Id,
                         Brand = data.Brand,
@@ -105,12 +106,43 @@ namespace CarRentail.Application.DBRequests
                         ElectricPower = data.ElectricPower,
                         State = data.State
                     };
-                    _vehicleRepository.UpdateHybridCar(hybrid);
+                    break;
+                case VehicleTypes.ElectricMotorcycle:
+                    newData = new ElectricMotorcycle
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        BatteryCapacity = data.BatteryCapacity,
+                        State = data.State
+                    };
+                    break;
+                case VehicleTypes.CombustionMotorcycle:
+                    newData = new CombustionMotorcycle
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        State = data.State
+                    };
                     break;
                 default:
                     throw new ArgumentException("Unsupported vehicle type.");
             }
-            return true;
+
+            _carRentalFacade.AddVehicleData(newData, vehicleTypes);
         }
     }
 }

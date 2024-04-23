@@ -27,11 +27,11 @@ namespace CarRentail.Infrastructure.Context
         public DbSet<ElectricMotorcycle> ElectricMotorcycles { get; set; }
         public DbSet<CombustionMotorcycle> CombustionMotorcycles { get; set; }
 
+        public DbSet<CarInspection> CarInspections { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-        
         }
     }
 }

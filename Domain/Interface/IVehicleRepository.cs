@@ -38,5 +38,8 @@ namespace CarRentail.Domain.Interface
         void AddCombustionMotorcycle(CombustionMotorcycle combustionMotorcycle);
         void UpdateCombustionMotorcycle(CombustionMotorcycle combustionMotorcycle);
         void DeleteCombustionMotorcycle(int id);
+
+        void AddCarInspection (CarInspection carInspection);
+        List<CarInspection> GetAllInspections();
     }
 }
