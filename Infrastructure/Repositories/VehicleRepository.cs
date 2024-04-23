@@ -178,5 +178,16 @@ namespace CarRentail.Infrastructure.Repositories
                 _context.SaveChanges();
             }
         }
+
+        public void AddCarInspection(CarInspection carInspection)
+        {
+            _context.Add(carInspection);
+            _context.SaveChanges();
+        }
+
+        public List<CarInspection> GetAllInspections()
+        {
+            return _context.CarInspections.ToList();
+        }
     }
 }

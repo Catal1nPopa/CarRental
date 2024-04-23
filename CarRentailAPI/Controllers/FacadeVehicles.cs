@@ -64,6 +64,7 @@ namespace CarRentailAPI.Controllers
                     {
                         Id = data.Id,
                         Brand = data.Brand,
+                        CarNumber = data.CarNumber,
                         Model = data.Model,
                         Year = data.Year,
                         Distance = data.Distance,
@@ -78,6 +79,7 @@ namespace CarRentailAPI.Controllers
                     {
                         Id = data.Id,
                         Brand = data.Brand,
+                        CarNumber = data.CarNumber,
                         Model = data.Model,
                         Year = data.Year,
                         Distance = data.Distance,
@@ -88,8 +90,54 @@ namespace CarRentailAPI.Controllers
                         State = data.State
                     };
                     break;
-                
-
+                case VehicleTypes.HybridCar:
+                    string nul;
+                    newData = new HybridCar
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        ElectricPower = data.ElectricPower,
+                        State = data.State
+                    };
+                    break;
+                case VehicleTypes.ElectricMotorcycle:
+                    newData = new ElectricMotorcycle
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        BatteryCapacity = data.BatteryCapacity,
+                        State = data.State
+                    };
+                    break;
+                case VehicleTypes.CombustionMotorcycle:
+                    newData = new CombustionMotorcycle
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        State = data.State
+                    };
+                    break;
                 default:
                     throw new ArgumentException("Unsupported vehicle type.");
             }

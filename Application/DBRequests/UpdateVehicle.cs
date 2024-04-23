@@ -28,6 +28,7 @@ namespace CarRentail.Application.DBRequests
                     {
                         Id = data.Id,
                         Brand = data.Brand,
+                        CarNumber = data.CarNumber,
                         Model = data.Model,
                         Year = data.Year,
                         Distance = data.Distance,
@@ -40,16 +41,27 @@ namespace CarRentail.Application.DBRequests
                     
                     break;
                 case VehicleType.VehicleTypes.CombustionMotorcycle:
-                    //if (vehicle is CombustionMotorcycle combustionMotorcycle)
-                    //{
-                    //    _vehicleRepository.UpdateCombustionMotorcycle(combustionMotorcycle);
-                    //}
+                    var comMoto = new CombustionMotorcycle
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        State = data.State
+                    };
+                    _vehicleRepository.UpdateCombustionMotorcycle(comMoto);
                     break;
                 case VehicleType.VehicleTypes.ElectricCar:
                     var newData2 = new ElectricCar
                     {
                         Id = data.Id,
                         Brand = data.Brand,
+                        CarNumber = data.CarNumber,
                         Model = data.Model,
                         Year = data.Year,
                         Distance = data.Distance,
@@ -60,78 +72,45 @@ namespace CarRentail.Application.DBRequests
                         State = data.State
                     };
                     _vehicleRepository.UpdateElectricCar(newData2);
-                    
                     break;
-                //case VehicleType.VehicleTypes.ElectricMotorcycle:
-                //    if (vehicle is ElectricMotorcycle)
-                //    {
-                //        _vehicleRepository.UpdateElectricMotorcycle((ElectricMotorcycle)vehicle);
-                //    }
-                //    break;
-                //case VehicleType.VehicleTypes.HybridCar:
-                //    if (vehicle is HybridCar hybridCar)
-                //    {
-                //        _vehicleRepository.UpdateHybridCar(hybridCar);
-                //    }
+                case VehicleType.VehicleTypes.ElectricMotorcycle:
+                    var carElec = new ElectricMotorcycle
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        BatteryCapacity = data.BatteryCapacity,
+                        State = data.State
+                    };
+                    _vehicleRepository.UpdateElectricMotorcycle(carElec);
+                    break;
+                case VehicleType.VehicleTypes.HybridCar:
+                    var hybrid = new HybridCar
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        ElectricPower = data.ElectricPower,
+                        State = data.State
+                    };
+                    _vehicleRepository.UpdateHybridCar(hybrid);
                     break;
                 default:
-                    // Handle unsupported vehicle types or throw an exception
                     throw new ArgumentException("Unsupported vehicle type.");
             }
-
             return true;
         }
-
-
-
-        //public static bool UpdateCombustionCar(IVehicleRepository _vehicleRepository, int id, CombustionCar combustionCar)
-        //{
-        //    if (id != combustionCar.Id)
-        //    {
-        //        return false;
-        //    }
-        //    _vehicleRepository.UpdateCombustionCar(combustionCar);
-        //    return true;
-        //}
-
-        //public static bool UpdateCombustionMotorcycle(IVehicleRepository _vehicleRepository, int id, CombustionMotorcycle combustionMotorcycle)
-        //{
-        //    if (id != combustionMotorcycle.Id)
-        //    {
-        //        return false;
-        //    }
-        //    _vehicleRepository.UpdateCombustionMotorcycle(combustionMotorcycle);
-        //    return true;
-        //}
-
-        //public static bool UpdateElectricCar(IVehicleRepository _vehicleRepository, int id, ElectricCar electricCar)
-        //{
-        //    if (id != electricCar.Id)
-        //    {
-        //        return false;
-        //    }
-        //    _vehicleRepository.UpdateElectricCar(electricCar);
-        //    return true;
-        //}
-
-        //public static bool UpdateeElectricMotor(IVehicleRepository _vehicleRepository, int id, ElectricMotorcycle electricMotorcycle)
-        //{
-        //    if (id != electricMotorcycle.Id)
-        //    {
-        //        return false;
-        //    }
-        //    _vehicleRepository.UpdateElectricMotorcycle(electricMotorcycle);
-        //    return true;
-        //}
-
-        //public static bool UpdateHybridCar(IVehicleRepository _vehicleRepository, int id, HybridCar hybridCar)
-        //{
-        //    if (id != hybridCar.Id)
-        //    {
-        //        return false;
-        //    }
-        //    _vehicleRepository.UpdateHybridCar(hybridCar);
-        //    return true;
-        //}
     }
 }

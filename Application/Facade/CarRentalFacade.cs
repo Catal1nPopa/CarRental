@@ -2,6 +2,7 @@
 using CarRentail.Domain.Interface;
 using CarRentail.Application.DBRequests;
 using CarRentail.Domain.Enums;
+using CarRentail.Infrastructure.Repositories;
 
 namespace CarRentail.Application.Facade
 {
@@ -14,7 +15,18 @@ namespace CarRentail.Application.Facade
             _carRepository = vehicleRepository;
         }
 
+        private readonly IVehicleInspectionService _inspectionService;
 
+        public CarRentalFacade(IVehicleInspectionService inspectionService)
+        {
+            _inspectionService = inspectionService;
+        }
+
+        public CarRentalFacade(IVehicleRepository vehicleRepository, IVehicleInspectionService vehicleInspectionService)
+        {
+            _carRepository = vehicleRepository;
+            _inspectionService = vehicleInspectionService;
+        }
         public void AddVehicleData(IVehicle data, VehicleType.VehicleTypes vehicleTypes)
         {
             AddVehicle.AddVehicleNew(_carRepository, data,vehicleTypes);
@@ -39,6 +51,16 @@ namespace CarRentail.Application.Facade
         {
            var res = UpdateVehicle.UpdateVehicleData(_carRepository, id, data, vehicleTypes);
            return res;
+        }
+
+        public void AddInspectionCar(CarInspection carInspection, CarInspectionEnum type)
+        {
+            AddCarInspection.AddInspectionBasic(_carRepository, _inspectionService, carInspection, type);
+        }
+
+        public List<CarInspection> GetAllInspectionCars()
+        {
+            return GetCarInspection.GetInspection(_carRepository);
         }
     }
 }

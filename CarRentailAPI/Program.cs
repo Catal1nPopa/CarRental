@@ -1,4 +1,5 @@
 using CarRentail.Application.Adapter;
+using CarRentail.Application.Decorator;
 using CarRentail.Application.Facade;
 using CarRentail.Domain.Entities;
 using CarRentail.Domain.Interface;
@@ -25,6 +26,7 @@ webHostBuilder.ConfigureServices(services =>
 {
     services.AddScoped<IVehicleRepository, VehicleRepository>();
     services.AddScoped<ICarRentalFacade, CarRentalFacade>();
+    services.AddScoped<IVehicleInspectionService, BasicInspectionService>();
     services.AddSingleton<ElectricCar>();
     services.AddSingleton<ElectricCarToMotorcycleAdapter>();
     services.AddControllers();

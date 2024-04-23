@@ -11,6 +11,7 @@ namespace CarRentail.Domain.Entities
     {
         public int Id { get; set; }
         public string Brand { get; set; }
+        public string CarNumber { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
         public int Distance { get; set; }
