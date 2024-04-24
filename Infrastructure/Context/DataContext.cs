@@ -29,6 +29,8 @@ namespace CarRentail.Infrastructure.Context
 
         public DbSet<CarInspection> CarInspections { get; set; }
 
+        public DbSet<RentalProc> RentalRegistration { get; set; } 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

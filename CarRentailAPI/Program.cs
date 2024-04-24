@@ -5,6 +5,7 @@ using CarRentail.Domain.Entities;
 using CarRentail.Domain.Interface;
 using CarRentail.Infrastructure.Context;
 using CarRentail.Infrastructure.Repositories;
+using CarRentailAPI.Injections;
 using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,7 @@ var webHostBuilder = builder.WebHost;
 
 builder.Services.AddControllers();
 
-
+builder.Services.AddApplication();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(option => option.AddPolicy(name: "CarRentailAPI",

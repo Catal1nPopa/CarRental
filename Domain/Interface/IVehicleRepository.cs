@@ -41,5 +41,10 @@ namespace CarRentail.Domain.Interface
 
         void AddCarInspection (CarInspection carInspection);
         List<CarInspection> GetAllInspections();
+
+         List<RentalProc> GetAllRentals();
+        void AddRentalRegistration(RentalProc  rentalRegistration);
+        void UpdateRentakRegistration(RentalProc  rentalRegistration);
+
     }
 }

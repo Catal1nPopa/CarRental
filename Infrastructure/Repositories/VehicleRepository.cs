@@ -189,5 +189,22 @@ namespace CarRentail.Infrastructure.Repositories
         {
             return _context.CarInspections.ToList();
         }
+
+        public List<RentalProc> GetAllRentals()
+        {
+           return  _context.RentalRegistration.ToList();
+        }
+
+        public void AddRentalRegistration(RentalProc rentalProc)
+        {
+            _context.Add(rentalProc);
+            _context.SaveChanges();
+        }
+
+        public void UpdateRentakRegistration(RentalProc rentalProc)
+        {
+            _context.Update(rentalProc);
+            _context.SaveChanges();
+        }
     }
 }
