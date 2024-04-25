@@ -10,12 +10,12 @@ namespace CarRentailAPI.Injections
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            //var assembly = Assembly.GetAssembly(typeof(GetUsersQueryHandler));
+            var assembly = Assembly.GetAssembly(typeof(GetRentalHandler));
 
-            services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly((typeof(Program)).Assembly));
+            services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(assembly));
             //services.AddValidatorsFromAssembly(assembly));
-            services.AddScoped<IRequestHandler<RentCarRequest, RentalProc>, CreateRentalHandler>();
-            services.AddTransient<IRequestHandler<GetRentailsRequest, List<RentalProc>>, GetRentalHandler>();
+            //services.AddScoped<IRequestHandler<RentCarRequest, RentalProc>, CreateRentalHandler>();
+            //services.AddTransient<IRequestHandler<GetRentailsRequest, List<RentalProc>>, GetRentalHandler>();
             
             return services;
         }

@@ -22,6 +22,8 @@ namespace CarRentail.Application.Handlers
         {
             var data = new RentalProc();
             data.CarNumber = request.CarNumber;
+            data.VehicleId = request.VehicleId;
+            data.VehicleType = request.VehicleType;
             data.CustomerId = request.CustomerId;
             data.StarTime = request.StarTime;
             data.EndTime = request.EndTime;
