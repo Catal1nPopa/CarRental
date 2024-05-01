@@ -1,12 +1,12 @@
-using CarRentail.Application.Adapter;
 using CarRentail.Application.Decorator;
 using CarRentail.Application.Facade;
+using CarRentail.Application.Observer;
+using CarRentail.Application.Strategy;
 using CarRentail.Domain.Entities;
 using CarRentail.Domain.Interface;
 using CarRentail.Infrastructure.Context;
 using CarRentail.Infrastructure.Repositories;
 using CarRentailAPI.Injections;
-using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 var webHostBuilder = builder.WebHost;
@@ -29,9 +29,29 @@ webHostBuilder.ConfigureServices(services =>
     services.AddScoped<ICarRentalFacade, CarRentalFacade>();
     services.AddScoped<IVehicleInspectionService, BasicInspectionService>();
     services.AddSingleton<ElectricCar>();
-    services.AddSingleton<ElectricCarToMotorcycleAdapter>();
     services.AddControllers();
     services.AddDbContext<DataContext>();
+
+    //iterator
+    services.AddSingleton<VehicleList>(new VehicleList(
+        new List<HybridCar>(), 
+        new List<ElectricCar>(), 
+        new List<CombustionCar>(), 
+        new List<ElectricMotorcycle>(), 
+        new List<CombustionMotorcycle>() 
+    ));
+
+
+    //strategy
+    services.AddTransient<StandardPricingStrategy>();
+    services.AddTransient<PremiumPricingStrategy>();
+    services.AddTransient<RentalService>();
+
+    //observer
+    services.AddTransient<IVehicleObserver, VehicleObserver>();
+    services.AddSingleton<VehicleSubject>();
+
+
 });
 var app = builder.Build();
 
