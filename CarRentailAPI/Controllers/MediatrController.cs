@@ -17,7 +17,7 @@ namespace CarRentailAPI.Controllers
         }
 
         [HttpPost("CreateRentalMediatr")]
-        public void CreateRental([FromBody] RentCarRequest request)
+        public void CreateRental([FromBody] RentCarRequest request) 
         {
             var data = _mediator.Send(request);
             //request Ok(data);

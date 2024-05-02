@@ -8,7 +8,7 @@ using CarRentail.Domain.Interface;
 
 namespace CarRentail.Domain.Entities
 {
-    public class VehicleList : IEnumerable<IVehicle>
+    public class VehicleList
     {
         public List<HybridCar> HybridCars { get; set; }
         public List<ElectricCar> HyElectricCars { get; set; }
@@ -23,39 +23,6 @@ namespace CarRentail.Domain.Entities
             CombustionCars = combustionCars;
             ElectricMotorcycle = electricMotorcycle;    
             CombustionMotorcycles = combustionMotorcycles;
-        }
-
-        public IEnumerator<IVehicle> GetEnumerator()
-        {
-            foreach (var hybridCar in HybridCars)
-            {
-                yield return hybridCar;
-            }
-
-            foreach (var electricCar in HyElectricCars)
-            {
-                yield return electricCar;
-            }
-
-            foreach (var combustionCar in CombustionCars)
-            {
-                yield return combustionCar;
-            }
-
-            foreach (var electricMotorcycle in ElectricMotorcycle)
-            {
-                yield return electricMotorcycle;
-            }
-
-            foreach (var combustionMotorcycle in CombustionMotorcycles)
-            {
-                yield return combustionMotorcycle;
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

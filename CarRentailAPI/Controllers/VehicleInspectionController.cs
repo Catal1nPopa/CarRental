@@ -9,26 +9,26 @@ namespace CarRentailAPI.Controllers
     [ApiController]
     public class VehicleInspectionController : ControllerBase
     {
-        //private readonly ICarRentalFacade _carRentalFacade;
+        private readonly ICarRentalFacade _carRentalFacade;
 
-        //public VehicleInspectionController(ICarRentalFacade carRentalFacade)
-        //{
-        //    _carRentalFacade = carRentalFacade;
-        //}
+        public VehicleInspectionController(ICarRentalFacade carRentalFacade)
+        {
+            _carRentalFacade = carRentalFacade;
+        }
 
-        //[HttpPost("CreateCarInspection - Decorator")]
-        //public void AddInspection(string carNumber, DateTime dateTime, CarInspectionEnum type)
-        //{
-        //    CarInspection carInspection = new CarInspection();
-        //    carInspection.CarNumber = carNumber;
-        //    carInspection.Date = dateTime;
-        //    _carRentalFacade.AddInspectionCar(carInspection, type);
-        //}
+        [HttpPost("CreateCarInspection - Decorator")]
+        public void AddInspection(string carNumber, DateTime dateTime, CarInspectionEnum type)
+        {
+            CarInspection carInspection = new CarInspection();
+            carInspection.CarNumber = carNumber;
+            carInspection.Date = dateTime;
+            _carRentalFacade.AddInspectionCar(carInspection, type);
+        }
 
-        //[HttpGet("GetInspections")]
-        //public List<CarInspection> GetInspection()
-        //{
-        //  return  _carRentalFacade.GetAllInspectionCars();
-        //}
+        [HttpGet("GetInspections")]
+        public List<CarInspection> GetInspection()
+        {
+            return _carRentalFacade.GetAllInspectionCars();
+        }
     }
 }
