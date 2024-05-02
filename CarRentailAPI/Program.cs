@@ -1,6 +1,5 @@
 using CarRentail.Application.Decorator;
 using CarRentail.Application.Facade;
-using CarRentail.Application.Observer;
 using CarRentail.Application.Strategy;
 using CarRentail.Domain.Entities;
 using CarRentail.Domain.Interface;
@@ -46,11 +45,6 @@ webHostBuilder.ConfigureServices(services =>
     services.AddTransient<StandardPricingStrategy>();
     services.AddTransient<PremiumPricingStrategy>();
     services.AddTransient<RentalService>();
-
-    //observer
-    services.AddTransient<IVehicleObserver, VehicleObserver>();
-    services.AddSingleton<VehicleSubject>();
-
 
 });
 var app = builder.Build();

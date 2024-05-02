@@ -12,137 +12,137 @@ namespace CarRentailAPI.Controllers
     [ApiController]
     public class FacadeVehicles : ControllerBase
     {
-        //private readonly ICarRentalFacade _carRentalFacade;
+        private readonly ICarRentalFacade _carRentalFacade;
 
-        //public FacadeVehicles(ICarRentalFacade carRentalFacade)
-        //{
-        //    _carRentalFacade = carRentalFacade;
-        //}
-        
-        //[HttpGet("Facade Get All")]
-        //public List<VehicleList> GetVehicle()
-        //{
-        //    return _carRentalFacade.getAllVehicles();
-        //}
+        public FacadeVehicles(ICarRentalFacade carRentalFacade)
+        {
+            _carRentalFacade = carRentalFacade;
+        }
 
-        //[HttpDelete("Facade Delete")]
-        //public void DeleteVehicle(int id, VehicleType.VehicleTypes type)
-        //{
-        //     _carRentalFacade.RemoveVehicle(id, type);
-        //}
+        [HttpGet("Facade Get All")]
+        public List<VehicleList> GetVehicle()
+        {
+            return _carRentalFacade.getAllVehicles();
+        }
 
-        //[HttpPut("Fcade Update")]
-        //public bool UpdateDateVehicle(int id, Vehicle data, VehicleType.VehicleTypes vehicleTypes)
-        //{
-        //   var res = _carRentalFacade.UpdateVehicles(id, data, vehicleTypes);
-        //   return res;
-        //}
+        [HttpDelete("Facade Delete")]
+        public void DeleteVehicle(int id, VehicleType.VehicleTypes type)
+        {
+            _carRentalFacade.RemoveVehicle(id, type);
+        }
 
-        //[HttpPost("Facade GetById")]
-        //public object GetVehicleById(int id, VehicleType.VehicleTypes vehicleType)
-        //{
-        //    var dataVehicle = _carRentalFacade.GetVehicleById(id, vehicleType);
-        //    if (dataVehicle != null)
-        //    {
-        //        return dataVehicle;
-        //    }
-        //    else
-        //    {
-        //        return "Datele nu au fost gasite";
-        //    }
-        //}
+        [HttpPut("Fcade Update")]
+        public bool UpdateDateVehicle(int id, Vehicle data, VehicleType.VehicleTypes vehicleTypes)
+        {
+            var res = _carRentalFacade.UpdateVehicles(id, data, vehicleTypes);
+            return res;
+        }
 
-        //[HttpPost("Facade Add Object")]
-        //public void AddObject(Vehicle data, VehicleType.VehicleTypes vehicleTypes)
-        //{
-        //    IVehicle newData;
+        [HttpPost("Facade GetById")]
+        public object GetVehicleById(int id, VehicleType.VehicleTypes vehicleType)
+        {
+            var dataVehicle = _carRentalFacade.GetVehicleById(id, vehicleType);
+            if (dataVehicle != null)
+            {
+                return dataVehicle;
+            }
+            else
+            {
+                return "Datele nu au fost gasite";
+            }
+        }
 
-        //    switch (vehicleTypes)
-        //    {
-        //        case VehicleType.VehicleTypes.CombustionCar:
-        //            newData = new CombustionCar
-        //            {
-        //                Id = data.Id,
-        //                Brand = data.Brand,
-        //                CarNumber = data.CarNumber,
-        //                Model = data.Model,
-        //                Year = data.Year,
-        //                Distance = data.Distance,
-        //                Photo = data.Photo,
-        //                Price = data.Price,
-        //                EnginePower = data.EnginePower,
-        //                State = data.State
-        //            };
-        //            break;
-        //        case VehicleType.VehicleTypes.ElectricCar:
-        //            newData = new ElectricCar
-        //            {
-        //                Id = data.Id,
-        //                Brand = data.Brand,
-        //                CarNumber = data.CarNumber,
-        //                Model = data.Model,
-        //                Year = data.Year,
-        //                Distance = data.Distance,
-        //                Photo = data.Photo,
-        //                Price = data.Price,
-        //                EnginePower = data.EnginePower,
-        //                BatteryCapacity = data.BatteryCapacity,
-        //                State = data.State
-        //            };
-        //            break;
-        //        case VehicleTypes.HybridCar:
-        //            string nul;
-        //            newData = new HybridCar
-        //            {
-        //                Id = data.Id,
-        //                Brand = data.Brand,
-        //                CarNumber = data.CarNumber,
-        //                Model = data.Model,
-        //                Year = data.Year,
-        //                Distance = data.Distance,
-        //                Photo = data.Photo,
-        //                Price = data.Price,
-        //                EnginePower = data.EnginePower,
-        //                ElectricPower = data.ElectricPower,
-        //                State = data.State
-        //            };
-        //            break;
-        //        case VehicleTypes.ElectricMotorcycle:
-        //            newData = new ElectricMotorcycle
-        //            {
-        //                Id = data.Id,
-        //                Brand = data.Brand,
-        //                CarNumber = data.CarNumber,
-        //                Model = data.Model,
-        //                Year = data.Year,
-        //                Distance = data.Distance,
-        //                Photo = data.Photo,
-        //                Price = data.Price,
-        //                EnginePower = data.EnginePower,
-        //                BatteryCapacity = data.BatteryCapacity,
-        //                State = data.State
-        //            };
-        //            break;
-        //        case VehicleTypes.CombustionMotorcycle:
-        //            newData = new CombustionMotorcycle
-        //            {
-        //                Id = data.Id,
-        //                Brand = data.Brand,
-        //                CarNumber = data.CarNumber,
-        //                Model = data.Model,
-        //                Year = data.Year,
-        //                Distance = data.Distance,
-        //                Photo = data.Photo,
-        //                Price = data.Price,
-        //                EnginePower = data.EnginePower,
-        //                State = data.State
-        //            };
-        //            break;
-        //        default:
-        //            throw new ArgumentException("Unsupported vehicle type.");
-        //    }
+        [HttpPost("Facade Add Object")]
+        public void AddObject(Vehicle data, VehicleType.VehicleTypes vehicleTypes)
+        {
+            IVehicle newData;
 
-        //    _carRentalFacade.AddVehicleData(newData, vehicleTypes);
-        //}
+            switch (vehicleTypes)
+            {
+                case VehicleType.VehicleTypes.CombustionCar:
+                    newData = new CombustionCar
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        State = data.State
+                    };
+                    break;
+                case VehicleType.VehicleTypes.ElectricCar:
+                    newData = new ElectricCar
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        BatteryCapacity = data.BatteryCapacity,
+                        State = data.State
+                    };
+                    break;
+                case VehicleTypes.HybridCar:
+                    string nul;
+                    newData = new HybridCar
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        ElectricPower = data.ElectricPower,
+                        State = data.State
+                    };
+                    break;
+                case VehicleTypes.ElectricMotorcycle:
+                    newData = new ElectricMotorcycle
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        BatteryCapacity = data.BatteryCapacity,
+                        State = data.State
+                    };
+                    break;
+                case VehicleTypes.CombustionMotorcycle:
+                    newData = new CombustionMotorcycle
+                    {
+                        Id = data.Id,
+                        Brand = data.Brand,
+                        CarNumber = data.CarNumber,
+                        Model = data.Model,
+                        Year = data.Year,
+                        Distance = data.Distance,
+                        Photo = data.Photo,
+                        Price = data.Price,
+                        EnginePower = data.EnginePower,
+                        State = data.State
+                    };
+                    break;
+                default:
+                    throw new ArgumentException("Unsupported vehicle type.");
+            }
+
+            _carRentalFacade.AddVehicleData(newData, vehicleTypes);
+        }
     }
 }
