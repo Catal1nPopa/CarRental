@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarRentail.Domain.Entities.Auth;
 
 namespace CarRentail.Domain.Interface
 {
@@ -45,6 +46,12 @@ namespace CarRentail.Domain.Interface
          List<RentalProc> GetAllRentals();
         void AddRentalRegistration(RentalProc  rentalRegistration);
         void UpdateRentakRegistration(RentalProc  rentalRegistration);
+
+        //Users
+
+        void AddUser(User user);
+        User GetUser(User user);
+
 
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CarRentail.Domain.Entities;
+using CarRentail.Domain.Entities.Auth;
 using CarRentail.Domain.Interface;
 using CarRentail.Infrastructure.Context;
 
@@ -205,6 +206,17 @@ namespace CarRentail.Infrastructure.Repositories
         {
             _context.Update(rentalProc);
             _context.SaveChanges();
+        }
+
+        public void AddUser(User dataUser)
+        {
+            _context.Users.Add(dataUser);
+            _context.SaveChanges();
+        }
+
+        public User GetUser(User dataUser)
+        {
+           return _context.Users.FirstOrDefault(v => v.username == dataUser.username);
         }
     }
 }

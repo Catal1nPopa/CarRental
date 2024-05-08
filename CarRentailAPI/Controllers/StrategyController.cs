@@ -1,4 +1,5 @@
 ﻿using CarRentail.Application.Strategy;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace CarRentailAPI.Controllers
         {
             _rentalService = rentalService;
         }
+        [Authorize]
         [HttpGet("Strategy")]
         public IActionResult CalculatePrice(int days)
         {
