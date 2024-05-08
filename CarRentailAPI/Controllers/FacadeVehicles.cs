@@ -2,6 +2,7 @@
 using CarRentail.Domain.Entities;
 using CarRentail.Domain.Enums;
 using CarRentail.Domain.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static CarRentail.Domain.Enums.VehicleType;
@@ -18,8 +19,8 @@ namespace CarRentailAPI.Controllers
         {
             _carRentalFacade = carRentalFacade;
         }
-
-        [HttpGet("Facade Get All")]
+        [Authorize]
+        [HttpGet("GetAllVehicles")]
         public List<VehicleList> GetVehicle()
         {
             return _carRentalFacade.getAllVehicles();
@@ -99,7 +100,7 @@ namespace CarRentailAPI.Controllers
                         CarNumber = data.CarNumber,
                         Model = data.Model,
                         Year = data.Year,
-                        Distance = data.Distance,
+                        Distance = data.Distance,   
                         Photo = data.Photo,
                         Price = data.Price,
                         EnginePower = data.EnginePower,

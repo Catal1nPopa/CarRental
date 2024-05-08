@@ -1,4 +1,5 @@
 ﻿using CarRentail.Domain.Entities;
+using CarRentail.Domain.Entities.Auth;
 using CarRentail.Domain.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,8 @@ namespace CarRentail.Infrastructure.Context
         public DbSet<CarInspection> CarInspections { get; set; }
 
         public DbSet<RentalProc> RentalRegistration { get; set; } 
+
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

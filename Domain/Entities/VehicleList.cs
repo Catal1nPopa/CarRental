@@ -12,7 +12,7 @@ namespace CarRentail.Domain.Entities
     {
         public List<HybridCar> HybridCars { get; set; }
         public List<ElectricCar> HyElectricCars { get; set; }
-        public List<CombustionCar> CombustionCars{ get; set; }
+        public List<CombustionCar> CombustionCars { get; set; }
         public List<ElectricMotorcycle> ElectricMotorcycle { get; set; }
         public List<CombustionMotorcycle> CombustionMotorcycles { get; set; }
 
@@ -21,7 +21,7 @@ namespace CarRentail.Domain.Entities
             HybridCars = hybridCars;
             HyElectricCars = hyElectricCars;
             CombustionCars = combustionCars;
-            ElectricMotorcycle = electricMotorcycle;    
+            ElectricMotorcycle = electricMotorcycle;
             CombustionMotorcycles = combustionMotorcycles;
         }
     }

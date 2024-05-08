@@ -1,67 +1,61 @@
-using CarRentail.Application.Decorator;
-using CarRentail.Application.Facade;
-using CarRentail.Application.Strategy;
-using CarRentail.Domain.Entities;
-using CarRentail.Domain.Interface;
-using CarRentail.Infrastructure.Context;
-using CarRentail.Infrastructure.Repositories;
-using CarRentailAPI.Injections;
+﻿using CarRentailAPI.Injections;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-var webHostBuilder = builder.WebHost;
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 builder.Services.AddApplication();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 builder.Services.AddCors(option => option.AddPolicy(name: "CarRentailAPI",
     policy =>
     {
         policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
     }));
 
-webHostBuilder.ConfigureServices(services =>
+
+builder.Services.AddAuthentication(options =>
 {
-    services.AddScoped<IVehicleRepository, VehicleRepository>();
-    services.AddScoped<ICarRentalFacade, CarRentalFacade>();
-    services.AddScoped<IVehicleInspectionService, BasicInspectionService>();
-    services.AddSingleton<ElectricCar>();
-    services.AddControllers();
-    services.AddDbContext<DataContext>();
-
-    //iterator
-    services.AddSingleton<VehicleList>(new VehicleList(
-        new List<HybridCar>(), 
-        new List<ElectricCar>(), 
-        new List<CombustionCar>(), 
-        new List<ElectricMotorcycle>(), 
-        new List<CombustionMotorcycle>() 
-    ));
-
-
-    //strategy
-    services.AddTransient<StandardPricingStrategy>();
-    services.AddTransient<PremiumPricingStrategy>();
-    services.AddTransient<RentalService>();
-
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("catalincatalinkey202020202020202")),
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ClockSkew = TimeSpan.Zero
+    };
 });
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
+app.UseCors("CarRentailAPI");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CarRentail API v1"));
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseHttpsRedirection();
 
-//app.UseRouting();///
-
-app.UseCors("CarRentailAPI");
+app.UseAuthentication();
 
 app.UseAuthorization();
 
@@ -69,8 +63,4 @@ app.MapControllers();
 
 app.Run();
 
-////
-app.UseEndpoints(endpoints =>/////
-{
-    endpoints.MapControllers();
-});
+
