@@ -1,15 +1,18 @@
-﻿using System;
+﻿using CarRentail.Domain.Entities;
+using CarRentail.Domain.Enums;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CarRentail.Domain.Interface;
 
-namespace CarRentail.Domain.Entities
+namespace CarRentail.Application.Requests
 {
-    public class ElectricCar : IVehicle
+    public class UpdateVehicleStatusRequest : IRequest<bool>
     {
-        public int Id { get; set; }
+        public int idCar {  get; set; }
+        public string vehicleTypes { get; set; }
         public string Brand { get; set; }
         public string CarNumber { get; set; }
         public string Model { get; set; }
@@ -18,14 +21,14 @@ namespace CarRentail.Domain.Entities
         public string Photo { get; set; }
         public int Price { get; set; }
         public int EnginePower { get; set; }
+        public int ElectricPower { get; set; }
         public int BatteryCapacity { get; set; }
-        public bool State { get; set; }
-        public string VehicleType { get; set; }
+        public UpdateVehicleStatusRequest() { }
 
-        public ElectricCar(){}
-        public ElectricCar(int id, string brand, string carNumber,string model, int year, int distance, string photo, int price, int enginePower, int batteryCapacity, bool state, string vehicleType)
+        public UpdateVehicleStatusRequest(int idCar, string vehicleTypes, string brand, string carNumber, string model, int year, int distance, string photo, int price, int enginePower, int electricPower, int batteryCapacity)
         {
-            Id = id;
+            this.idCar = idCar;
+            this.vehicleTypes = vehicleTypes;
             Brand = brand;
             CarNumber = carNumber;
             Model = model;
@@ -34,9 +37,8 @@ namespace CarRentail.Domain.Entities
             Photo = photo;
             Price = price;
             EnginePower = enginePower;
+            ElectricPower = electricPower;
             BatteryCapacity = batteryCapacity;
-            State = state;
-            VehicleType = vehicleType;
         }
     }
 }

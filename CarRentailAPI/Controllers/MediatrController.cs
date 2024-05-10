@@ -1,5 +1,7 @@
-﻿using CarRentail.Application.Requests;
+﻿using CarRentail.Application.Models;
+using CarRentail.Application.Requests;
 using CarRentail.Domain.Entities;
+using CarRentail.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +19,35 @@ namespace CarRentailAPI.Controllers
         }
 
         [HttpPost("CreateRentalMediatr")]
-        public void CreateRental([FromBody] RentCarRequest request) 
+        public async Task CreateRental([FromBody] RentModel dataRental) 
         {
-            var data = _mediator.Send(request);
-            //request Ok(data);
+            try
+            {
+                GetByIdVehicleRequest checkVehicle = new GetByIdVehicleRequest();
+                checkVehicle.Id = dataRental.idCar;
+                checkVehicle.vehicleType = dataRental.vehicleTypes;
+                Vehicle checkResponse = await _mediator.Send(checkVehicle);
+
+                RentCarRequest dataRent = new RentCarRequest();
+                    dataRent.CustomerId = dataRental.CustomerId;
+                    dataRent.CarNumber = checkResponse.CarNumber;
+                    dataRent.VehicleId = dataRental.idCar;
+                    dataRent.VehicleType = dataRental.vehicleTypes;
+                    dataRent.StarTime = DateTime.Today;
+                    dataRent.EndTime = DateTime.Today.AddDays(dataRental.rentalDays);
+
+                    var res = _mediator.Send(dataRent);
+
+                    UpdateVehicleStatusRequest dataUpdate = new UpdateVehicleStatusRequest();
+                    dataUpdate.idCar = dataRental.idCar;
+                    dataUpdate.vehicleTypes = dataRental.vehicleTypes;
+
+                    var response = _mediator.Send(dataUpdate);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         [HttpGet("GetRentals")]
@@ -32,5 +59,7 @@ namespace CarRentailAPI.Controllers
             var rentals =  _mediator.Send(request);
             return rentals;
         }
+
+    
     }
 }
