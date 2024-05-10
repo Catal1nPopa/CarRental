@@ -21,6 +21,6 @@ namespace CarRentail.Domain.Entities
         public int ElectricPower { get; set; }
         public int BatteryCapacity { get; set; }
         public bool State { get; set; }
-        //ublic string VehicleType { get; set; }
+        //public string VehicleType { get; set; }
     }
 }

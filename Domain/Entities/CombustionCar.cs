@@ -19,10 +19,11 @@ namespace CarRentail.Domain.Entities
         public bool State { get; set; }
         public int Price { get; set; }
         public int EnginePower { get; set; }
+        public string VehicleType { get; set; } 
         
         public CombustionCar(){}
 
-        public CombustionCar(int id, string brand, string carModel,string model, int year, int distance, string photo, bool state, int price, int enginePower)
+        public CombustionCar(int id, string brand, string carModel,string model, int year, int distance, string photo, bool state, int price, int enginePower, string vehicleType)
         {
             Id = id;
             Brand = brand;
@@ -34,6 +35,7 @@ namespace CarRentail.Domain.Entities
             State = state;
             Price = price;
             EnginePower = enginePower;
+            VehicleType = vehicleType;
         }
     }
 }

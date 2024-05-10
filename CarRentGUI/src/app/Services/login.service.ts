@@ -46,4 +46,16 @@ export class LoginService {
   {
       localStorage.setItem('token', token);
   }
+
+  getUserIdFromToken(): number {
+    const jwt = new JwtHelperService();
+    const token = this.getToken();
+    if (token) {
+      const decodedToken: any = jwt.decodeToken(token);
+      console.log(decodedToken.nameid);
+      console.log("dasas");
+      return decodedToken.nameid;
+    }
+    return 0;
+  }
 }

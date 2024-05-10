@@ -19,7 +19,7 @@ namespace CarRentailAPI.Controllers
         {
             _carRentalFacade = carRentalFacade;
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetAllVehicles")]
         public List<VehicleList> GetVehicle()
         {
@@ -72,7 +72,8 @@ namespace CarRentailAPI.Controllers
                         Photo = data.Photo,
                         Price = data.Price,
                         EnginePower = data.EnginePower,
-                        State = data.State
+                        State = data.State,
+                        VehicleType = "1"
                     };
                     break;
                 case VehicleType.VehicleTypes.ElectricCar:
@@ -88,7 +89,8 @@ namespace CarRentailAPI.Controllers
                         Price = data.Price,
                         EnginePower = data.EnginePower,
                         BatteryCapacity = data.BatteryCapacity,
-                        State = data.State
+                        State = data.State,
+                        VehicleType = "2"
                     };
                     break;
                 case VehicleTypes.HybridCar:
@@ -105,7 +107,8 @@ namespace CarRentailAPI.Controllers
                         Price = data.Price,
                         EnginePower = data.EnginePower,
                         ElectricPower = data.ElectricPower,
-                        State = data.State
+                        State = data.State,
+                        VehicleType = "0"
                     };
                     break;
                 case VehicleTypes.ElectricMotorcycle:
@@ -121,7 +124,8 @@ namespace CarRentailAPI.Controllers
                         Price = data.Price,
                         EnginePower = data.EnginePower,
                         BatteryCapacity = data.BatteryCapacity,
-                        State = data.State
+                        State = data.State,
+                        VehicleType = "3"
                     };
                     break;
                 case VehicleTypes.CombustionMotorcycle:
@@ -136,7 +140,8 @@ namespace CarRentailAPI.Controllers
                         Photo = data.Photo,
                         Price = data.Price,
                         EnginePower = data.EnginePower,
-                        State = data.State
+                        State = data.State,
+                        VehicleType = "4"
                     };
                     break;
                 default:

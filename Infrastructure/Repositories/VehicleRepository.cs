@@ -38,8 +38,31 @@ namespace CarRentail.Infrastructure.Repositories
 
         public void UpdateHybridCar(HybridCar hybridCar)
         {
-            _context.Update(hybridCar);
-            _context.SaveChanges();
+            try
+            {
+                var hybridCar2 = _context.HybridCars.Find(hybridCar.Id);
+
+                if (hybridCar2 != null)
+                {
+                    if (hybridCar2.State)
+                    {
+                        hybridCar2.State = false;
+                    }
+                    else
+                    {
+                        hybridCar2.State = true;
+                    }
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine(" car not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void DeleteHybridCar(int id)
@@ -70,8 +93,31 @@ namespace CarRentail.Infrastructure.Repositories
 
         public void UpdateElectricCar(ElectricCar electricCar)
         {
-            _context.Update(electricCar);
-            _context.SaveChanges();
+            try
+            {
+                var electricCar2 = _context.ElectricCars.Find(electricCar.Id);
+
+                if (electricCar2 != null)
+                {
+                    if (electricCar2.State)
+                    {
+                        electricCar2.State = false;
+                    }
+                    else
+                    {
+                        electricCar2.State = true;
+                    }
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine(" car not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void DeleteElectricCar(int id)
@@ -102,8 +148,31 @@ namespace CarRentail.Infrastructure.Repositories
 
         public void UpdateCombustionCar(CombustionCar combustionCar)
         {
-            _context.Update(combustionCar);
-            _context.SaveChanges();
+            try
+            {
+                var combustionCar2 = _context.CombustionCars.Find(combustionCar.Id);
+
+                if (combustionCar2 != null)
+                {
+                    if (combustionCar2.State)
+                    {
+                        combustionCar2.State = false;
+                    }
+                    else
+                    {
+                        combustionCar2.State = true;
+                    }
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine(" car not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void DeleteCombustionCar(int id)
@@ -134,8 +203,31 @@ namespace CarRentail.Infrastructure.Repositories
 
         public void UpdateElectricMotorcycle(ElectricMotorcycle electricMotorcycle)
         {
-            _context.Update(electricMotorcycle);
-            _context.SaveChanges();
+            try
+            {
+                var electricMotorcycle2 = _context.ElectricMotorcycles.Find(electricMotorcycle.Id);
+
+                if (electricMotorcycle2 != null)
+                {
+                    if (electricMotorcycle2.State)
+                    {
+                        electricMotorcycle2.State = false;
+                    }
+                    else
+                    {
+                        electricMotorcycle2.State = true;
+                    }
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine(" motorcycle not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void DeleteElectricMotorcycle(int id)
@@ -166,8 +258,31 @@ namespace CarRentail.Infrastructure.Repositories
 
         public void UpdateCombustionMotorcycle(CombustionMotorcycle combustionMotorcycle)
         {
-            _context.Update(combustionMotorcycle);
-            _context.SaveChanges();
+            try
+            {
+                var combustionMotorcycle2 = _context.CombustionMotorcycles.Find(combustionMotorcycle.Id);
+
+                if (combustionMotorcycle2 != null)
+                {
+                    if (combustionMotorcycle2.State)
+                    {
+                        combustionMotorcycle2.State = false;
+                    }
+                    else
+                    {
+                        combustionMotorcycle2.State = true;
+                    }
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine(" motorcycle not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void DeleteCombustionMotorcycle(int id)
