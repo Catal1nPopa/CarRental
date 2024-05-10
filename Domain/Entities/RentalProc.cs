@@ -19,8 +19,9 @@ namespace CarRentail.Domain.Entities
         public string CarNumber { get; set; }
         public DateTime StarTime { get; set; }
         public DateTime EndTime { get; set; }
+        public int TotalPrice { get; set; }
 
-        public RentalProc(int id, int customerId, int vehicleId, string vehicleType, string carNumber, DateTime starTime, DateTime endTime)
+        public RentalProc(int id, int customerId, int vehicleId, string vehicleType, string carNumber, DateTime starTime, DateTime endTime, int totalPrice)
         {
             Id = id;
             CustomerId = customerId;
@@ -29,6 +30,7 @@ namespace CarRentail.Domain.Entities
             CarNumber = carNumber;
             StarTime = starTime;
             EndTime = endTime;
+            TotalPrice = totalPrice;
         }
     }
 }

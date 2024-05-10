@@ -8,6 +8,6 @@ namespace CarRentail.Domain.Interface
 {
     public interface IPricingStrategy
     {
-        decimal CalculateRentalPrice(int days);
+        int CalculateRentalPrice(int days);
     }
 }

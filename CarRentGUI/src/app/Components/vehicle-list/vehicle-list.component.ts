@@ -3,6 +3,7 @@ import { VehicleService } from '../../Services/vehicle.service';
 import { RentalsService } from '../../Services/rentals.service';
 import { RentModel } from '../../Models/RentModel';
 import { LoginService } from '../../Services/login.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -16,7 +17,8 @@ export class VehicleListComponent implements OnInit {
   
   constructor(private vehicleService: VehicleService,
     private rentService: RentalsService,
-    private authService: LoginService
+    private authService: LoginService,
+    private toast : NgToastService
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +56,26 @@ export class VehicleListComponent implements OnInit {
         error => {
           console.error("Error creating rental:", error);
           // În cazul în care apare o eroare în timpul creării rental-ului, afișează un mesaj corespunzător către utilizator
+        }
+      );
+  }
+
+  getRolefromToken(){
+    return this.authService.getRolefromToken();
+  }
+
+  deleteVehicle(): void {
+    console.log("accesat")
+    this.vehicleService.deleteVehicle(this.rentData.idCar, this.rentData.vehicleTypes)
+      .subscribe(
+        () => {
+          this.toast.success({detail:"SUCCESS",summary:'Stergere cu succes',duration:5000});
+          console.log('Vehicol ștears cu succes!');
+          this.getVehicles();
+        },
+        error => {
+          this.toast.error({detail:"ERROR",summary:'Eroare la stergere',duration:5000});
+          console.error('Eroare la ștergere:', error);
         }
       );
   }

@@ -1,6 +1,7 @@
 ﻿using CarRentail.Application.Services;
 using CarRentail.Domain.Entities.Auth;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CarRentailAPI.Controllers
 {
@@ -38,10 +39,16 @@ namespace CarRentailAPI.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterUser([FromBody] User user)
         {
+            if (user.password.IsNullOrEmpty() || user.username.IsNullOrEmpty())
+                return BadRequest();
             try
             {
-                await userServices.register(user);
-                return Ok("Registration successful.");
+
+               var req = await userServices.register(user);
+               if (req.Equals("existent"))
+                   return BadRequest();
+               else
+                return Ok();
             }
             catch (Exception ex)
             {

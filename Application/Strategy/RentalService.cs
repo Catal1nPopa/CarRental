@@ -17,7 +17,7 @@ namespace CarRentail.Application.Strategy
             _premiumPricingStrategy = premiumPricingStrategy;
         }
 
-        public decimal CalculateRentalPrice(int days)
+        public int CalculateRentalPrice(int days)
         {
             if (days <= 30)
             {

@@ -11,23 +11,23 @@ namespace CarRentail.Application.DBRequests
 {
     public class AddVehicle
     {
-        public static void AddVehicleNew(IVehicleRepository _vehicleRepository, IVehicle data, VehicleType.VehicleTypes vehicleType)
+        public static void AddVehicleNew(IVehicleRepository _vehicleRepository, IVehicle data, string vehicleType)
         {
             switch (vehicleType)
             {
-                case VehicleType.VehicleTypes.CombustionCar:
+                case "1":
                     _vehicleRepository.AddCombustionCar((CombustionCar)data);
                     break;
-                case VehicleType.VehicleTypes.ElectricCar:
+                case "2":
                     _vehicleRepository.AddElectricCar((ElectricCar)data);
                     break;
-                case VehicleType.VehicleTypes.HybridCar:
+                case "0":
                     _vehicleRepository.AddHybridCar((HybridCar)data);
                     break;
-                case VehicleType.VehicleTypes.CombustionMotorcycle:
+                case "4":
                     _vehicleRepository.AddCombustionMotorcycle((CombustionMotorcycle)data);
                     break;
-                case VehicleType.VehicleTypes.ElectricMotorcycle:
+                case "3":
                     _vehicleRepository.AddElectricMotorcycle((ElectricMotorcycle)data);
                     break;
                 default:

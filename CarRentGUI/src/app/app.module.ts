@@ -11,6 +11,9 @@ import { HomeComponent } from './Components/home/home.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { VehicleListComponent } from './Components/vehicle-list/vehicle-list.component';
 import { RentalListComponent } from './Components/rental-list/rental-list.component'; 
+import { NgToastModule } from 'ng-angular-popup';
+import { RegisterComponent } from './Components/LoginComponent/register/register.component';
+import { AddVehicleComponent } from './Components/add-vehicle/add-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { RentalListComponent } from './Components/rental-list/rental-list.compon
     LoginComponentComponent,
     HomeComponent,
     VehicleListComponent,
-    RentalListComponent
+    RentalListComponent,
+    RegisterComponent,
+    AddVehicleComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,8 @@ import { RentalListComponent } from './Components/rental-list/rental-list.compon
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    NgToastModule
   ],
   providers: [
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),

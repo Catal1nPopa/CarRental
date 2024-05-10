@@ -26,18 +26,25 @@ namespace CarRentailAPI.Controllers
             return _carRentalFacade.getAllVehicles();
         }
 
-        [HttpDelete("Facade Delete")]
-        public void DeleteVehicle(int id, VehicleType.VehicleTypes type)
+        [HttpDelete("DeleteVehicle")]
+        public void DeleteVehicle(int id, string type)
         {
-            _carRentalFacade.RemoveVehicle(id, type);
+            VehicleType.VehicleTypes vehicleTypes = new VehicleTypes();
+            switch (type)
+            {
+                case ("0"):
+                    vehicleTypes = 0;
+                    break;
+            }
+            _carRentalFacade.RemoveVehicle(id, vehicleTypes);
         }
 
-        [HttpPut("Fcade Update")]
-        public bool UpdateDateVehicle(int id, Vehicle data, VehicleType.VehicleTypes vehicleTypes)
-        {
-            var res = _carRentalFacade.UpdateVehicles(id, data, vehicleTypes);
-            return res;
-        }
+        //[HttpPut("Fcade Update")]
+        //public bool UpdateDateVehicle(int id, Vehicle data, VehicleType.VehicleTypes vehicleTypes)
+        //{
+        //    var res = _carRentalFacade.UpdateVehicles(id, data, vehicleTypes);
+        //    return res;
+        //}
 
         [HttpPost("Facade GetById")]
         public object GetVehicleById(int id, VehicleType.VehicleTypes vehicleType)
@@ -53,14 +60,15 @@ namespace CarRentailAPI.Controllers
             }
         }
 
-        [HttpPost("Facade Add Object")]
-        public void AddObject(Vehicle data, VehicleType.VehicleTypes vehicleTypes)
+        [HttpPost("AddVehicle")]
+        public void AddObject(AddNewVehicle data)
         {
+            data.State = true;
             IVehicle newData;
 
-            switch (vehicleTypes)
+            switch (data.VehicleType)
             {
-                case VehicleType.VehicleTypes.CombustionCar:
+                case "1":
                     newData = new CombustionCar
                     {
                         Id = data.Id,
@@ -76,7 +84,7 @@ namespace CarRentailAPI.Controllers
                         VehicleType = "1"
                     };
                     break;
-                case VehicleType.VehicleTypes.ElectricCar:
+                case "2":
                     newData = new ElectricCar
                     {
                         Id = data.Id,
@@ -93,7 +101,7 @@ namespace CarRentailAPI.Controllers
                         VehicleType = "2"
                     };
                     break;
-                case VehicleTypes.HybridCar:
+                case "0":
                     string nul;
                     newData = new HybridCar
                     {
@@ -111,7 +119,7 @@ namespace CarRentailAPI.Controllers
                         VehicleType = "0"
                     };
                     break;
-                case VehicleTypes.ElectricMotorcycle:
+                case "3":
                     newData = new ElectricMotorcycle
                     {
                         Id = data.Id,
@@ -128,7 +136,7 @@ namespace CarRentailAPI.Controllers
                         VehicleType = "3"
                     };
                     break;
-                case VehicleTypes.CombustionMotorcycle:
+                case "4":
                     newData = new CombustionMotorcycle
                     {
                         Id = data.Id,
@@ -148,7 +156,7 @@ namespace CarRentailAPI.Controllers
                     throw new ArgumentException("Unsupported vehicle type.");
             }
 
-            _carRentalFacade.AddVehicleData(newData, vehicleTypes);
+            _carRentalFacade.AddVehicleData(newData, data.VehicleType);
         }
     }
 }

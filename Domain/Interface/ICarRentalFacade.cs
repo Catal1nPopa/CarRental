@@ -6,7 +6,7 @@ namespace CarRentail.Domain.Interface
 {
     public interface ICarRentalFacade
     {
-        void AddVehicleData(IVehicle data, VehicleType.VehicleTypes vehicleTypes);
+        void AddVehicleData(IVehicle data, string vehicleTypes);
         void RemoveVehicle(int id, VehicleType.VehicleTypes types);
         object GetVehicleById(int id, VehicleType.VehicleTypes types);
         List<VehicleList> getAllVehicles();

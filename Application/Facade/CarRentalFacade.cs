@@ -27,7 +27,7 @@ namespace CarRentail.Application.Facade
             _carRepository = vehicleRepository;
             _inspectionService = vehicleInspectionService;
         }
-        public void AddVehicleData(IVehicle data, VehicleType.VehicleTypes vehicleTypes)
+        public void AddVehicleData(IVehicle data, string vehicleTypes)
         {
             AddVehicle.AddVehicleNew(_carRepository, data,vehicleTypes);
         }

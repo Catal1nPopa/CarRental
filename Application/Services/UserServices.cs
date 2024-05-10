@@ -30,6 +30,11 @@ namespace CarRentail.Application.Services
 
         public async Task<string> register(User user)
         {
+            var checkUser = vehicleRepository.GetUser(user);
+            if (checkUser != null)
+            {
+                return "existent";
+            }
             vehicleRepository.AddUser(user);
             return "Inregistrare cu succes";
         }
