@@ -1,0 +1,60 @@
+<!-- car-form.component.html -->
+<form (ngSubmit)="submitForm()" #carForm="ngForm">
+    <div class="form-group">
+      <label for="brand">Brand:</label>
+      <input type="text" class="form-control" id="brand" name="brand" [(ngModel)]="car.brand" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="carNumber">Car Number:</label>
+      <input type="text" class="form-control" id="carNumber" name="carNumber" [(ngModel)]="car.carNumber" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="model">Model:</label>
+      <input type="text" class="form-control" id="model" name="model" [(ngModel)]="car.model" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="year">Year:</label>
+      <input type="number" class="form-control" id="year" name="year" [(ngModel)]="car.year" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="distance">Distance:</label>
+      <input type="number" class="form-control" id="distance" name="distance" [(ngModel)]="car.distance" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="photo">Photo:</label>
+      <input type="text" class="form-control" id="photo" name="photo" [(ngModel)]="car.photo">
+    </div>
+    
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" class="form-control" id="price" name="price" [(ngModel)]="car.price" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="enginePower">Engine Power:</label>
+      <input type="number" class="form-control" id="enginePower" name="enginePower" [(ngModel)]="car.enginePower" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="electricPower">Electric Power:</label>
+      <input type="number" class="form-control" id="electricPower" name="electricPower" [(ngModel)]="car.electricPower" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="batteryCapacity">Battery Capacity:</label>
+      <input type="number" class="form-control" id="batteryCapacity" name="batteryCapacity" [(ngModel)]="car.batteryCapacity" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="vehicleType">Vehicle Type:</label>
+      <input type="text" class="form-control" id="vehicleType" name="vehicleType" [(ngModel)]="car.vehicleType" required>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  

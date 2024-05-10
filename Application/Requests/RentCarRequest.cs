@@ -11,10 +11,10 @@ namespace CarRentail.Application.Requests
         public string VehicleType { get; set; }
         public DateTime StarTime { get; set; }
         public DateTime EndTime { get; set; }
-
+        public int TotalPrice { get; set; }
         public RentCarRequest() { }
 
-        public RentCarRequest(int customerId, string carNumber, int vehicleId, string vehicleType, DateTime starTime, DateTime endTime)
+        public RentCarRequest(int customerId, string carNumber, int vehicleId, string vehicleType, DateTime starTime, DateTime endTime, int totalPrice)
         {
             CustomerId = customerId;
             CarNumber = carNumber;
@@ -22,6 +22,7 @@ namespace CarRentail.Application.Requests
             VehicleType = vehicleType;
             StarTime = starTime;
             EndTime = endTime;
+            TotalPrice = totalPrice;
         }
     }
 }

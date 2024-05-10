@@ -35,6 +35,7 @@ namespace CarRentailAPI.Controllers
                     dataRent.VehicleType = dataRental.vehicleTypes;
                     dataRent.StarTime = DateTime.Today;
                     dataRent.EndTime = DateTime.Today.AddDays(dataRental.rentalDays);
+                    dataRent.TotalPrice = await _mediator.Send(new GetStrategyPriceRequest(dataRental.rentalDays));
 
                     var res = _mediator.Send(dataRent);
 

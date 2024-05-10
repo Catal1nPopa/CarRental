@@ -9,7 +9,7 @@ namespace CarRentail.Application.Strategy
 {
     public class StandardPricingStrategy : IPricingStrategy
     {
-        public decimal CalculateRentalPrice(int days)
+        public int CalculateRentalPrice(int days)
         {
             return days * 50;
         }
