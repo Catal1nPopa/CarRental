@@ -1,183 +1,207 @@
 <div class="row">
-    <div class="col-12" *ngFor="let vehicle of vehicleList">
-      <h3>Hybrid Cars:</h3>
-      <div class="row">
-        <div class="col-2 mb-3" *ngFor="let car of vehicle.hybridCars">
-          <div class="card">
-            <div class="card-body">
-              <div (click)="toggleVehicleDetails(car)">
-                <p class="card-text">ID: {{ car.id }}</p>
-                <p class="card-text">Brand: {{ car.brand }}</p>
-                <p class="card-text">Model: {{ car.model }}</p>
-                <p class="card-text">Year: {{ car.year }}</p>
-                <p class="card-text" [ngClass]="{'text-success': car.state, 'text-danger': !car.state}">{{ car.state ? 'Disponibil' : 'Indisponibil' }}</p>
-                <!-- Adăugare clasă CSS în funcție de starea mașinii -->
-                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
+  <div class="col-12" *ngFor="let vehicle of vehicleList">
+    <h3>Hybrid Cars:</h3>
+    <div class="row">
+      <div class="col-2 mb-3" *ngFor="let car of vehicle.hybridCars">
+        <div class="card">
+          <div class="card-body">
+            <div (click)="toggleVehicleDetails(car)">
+              <p class="card-text id_class">ID: {{ car.id }}</p>
+              <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
+              <div class="card-text-row">
+                <p class="card-text-left">{{ car.brand }}</p>
+                <p class="card-text-right"> {{ car.model }}</p>
               </div>
-              <div *ngIf="car.showDetails">
-                <p class="card-text">Car Number: {{ car.carNumber }}</p>
-                <p class="card-text">Distance: {{ car.distance }}</p>
-                <p class="card-text">Price: {{ car.price }}</p>
-                <p class="card-text">Engine Power: {{ car.enginePower }}</p>
-                <p class="card-text">Electric Power: {{ car.electricPower }}</p>
-                <form (ngSubmit)="onSubmit()">
-                  <label>
-                    Zile arenda:
-                    <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
-                    <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
-                    <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3" style="display: none;">
-                  </label>
-                  <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
-                </form>
-                <button class="btn btn-danger" *ngIf="getRolefromToken() === 'Admin'" (click)="deleteVehicle()">Delete vehicle</button>
+              <div class="card-text-row">
+                <p class="card-text"> {{ car.year }}</p>
+              <p class="card-text"> {{ car.price | currency: 'EUR'}}</p>
               </div>
+              <p class="card-text">
+                <span class="circle" [ngClass]="{'circle-green': car.state, 'circle-red': !car.state}"></span>
+                {{ car.state ? 'Disponibil' : 'Indisponibil' }}
+              </p><!-- Adăugare clasă CSS în funcție de starea mașinii -->
+            </div>
+            <div *ngIf="car.showDetails">
+              <p class="card-text">Car Number: {{ car.carNumber }}</p>
+              <p class="card-text">Distance: {{ car.distance }}</p>
+              <p class="card-text">Engine Power: {{ car.enginePower }}</p>
+              <p class="card-text">Electric Power: {{ car.electricPower }}</p>
+              <form (ngSubmit)="onSubmit()">
+                <label>
+                  Zile arenda:
+                  <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
+                  <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
+                  <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3"
+                    style="display: none;">
+                </label>
+                <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
+              </form>
+              <button class="btn btn-danger" *ngIf="getRolefromToken() === 'Admin'" (click)="deleteVehicle()">Delete
+                vehicle</button>
+              <button (click)="updateVehicleStatus()" class="btn btn-info"
+                *ngIf="getRolefromToken() === 'Admin'">UpdateStatus</button>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <h3>Combustion Cars:</h3>
-      <div class="row">
-        <div class="col-2 mb-3" *ngFor="let car of vehicle.combustionCars">
-          <div class="card">
-            <div class="card-body">
-              <div (click)="toggleVehicleDetails(car)">
-                <p class="card-text">ID: {{ car.id }}</p>
-                <p class="card-text">Brand: {{ car.brand }}</p>
-                <p class="card-text">Model: {{ car.model }}</p>
-                <p class="card-text">Year: {{ car.year }}</p>
-                <p class="card-text" [ngClass]="{'text-success': car.state, 'text-danger': !car.state}">{{ car.state ? 'Disponibil' : 'Indisponibil' }}</p>
-                <!-- Adăugare clasă CSS în funcție de starea mașinii -->
-                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
-              </div>
-              <div *ngIf="car.showDetails">
-                <p class="card-text">Car Number: {{ car.carNumber }}</p>
-                <p class="card-text">Distance: {{ car.distance }}</p>
-                <p class="card-text">Price: {{ car.price }}</p>
-                <p class="card-text">Engine Power: {{ car.enginePower }}</p>
-                <form (ngSubmit)="onSubmit()">
-                  <label>
-                    Zile arenda:
-                    <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
-                    <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
-                    <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3" style="display: none;">
-                  </label>
-                  <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
-                </form>
-                <button class="btn btn-danger" *ngIf="getRolefromToken() === 'Admin'" (click)="deleteVehicle()">Delete vehicle</button>
-              </div>
+    <h3>Combustion Cars:</h3>
+    <div class="row">
+      <div class="col-2 mb-3" *ngFor="let car of vehicle.combustionCars">
+        <div class="card">
+          <div class="card-body">
+            <div (click)="toggleVehicleDetails(car)">
+              <p class="card-text">ID: {{ car.id }}</p>
+              <p class="card-text">Brand: {{ car.brand }}</p>
+              <p class="card-text">Model: {{ car.model }}</p>
+              <p class="card-text">Year: {{ car.year }}</p>
+              <p class="card-text">
+                <span class="circle" [ngClass]="{'circle-green': car.state, 'circle-red': !car.state}"></span>
+                {{ car.state ? 'Disponibil' : 'Indisponibil' }}
+              </p><!-- Adăugare clasă CSS în funcție de starea mașinii -->
+              <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
+            </div>
+            <div *ngIf="car.showDetails">
+              <p class="card-text">Car Number: {{ car.carNumber }}</p>
+              <p class="card-text">Distance: {{ car.distance }}</p>
+              <p class="card-text">Price: {{ car.price }}</p>
+              <p class="card-text">Engine Power: {{ car.enginePower }}</p>
+              <form (ngSubmit)="onSubmit()">
+                <label>
+                  Zile arenda:
+                  <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
+                  <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
+                  <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3"
+                    style="display: none;">
+                </label>
+                <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
+              </form>
+              <button (click)="updateVehicleStatus()" class="btn btn-info"
+                *ngIf="getRolefromToken() === 'Admin'">UpdateStatus</button>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <h3>Electric Cars:</h3>
-      <div class="row">
-        <div class="col-2 mb-3" *ngFor="let car of vehicle.hyElectricCars">
-          <div class="card">
-            <div class="card-body">
-              <div (click)="toggleVehicleDetails(car)">
-                <p class="card-text">ID: {{ car.id }}</p>
-                <p class="card-text">Brand: {{ car.brand }}</p>
-                <p class="card-text">Model: {{ car.model }}</p>
-                <p class="card-text">Year: {{ car.year }}</p>
-                <p class="card-text" [ngClass]="{'text-success': car.state, 'text-danger': !car.state}">{{ car.state ? 'Disponibil' : 'Indisponibil' }}</p>
-                <!-- Adăugare clasă CSS în funcție de starea mașinii -->
-                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
-              </div>
-              <div *ngIf="car.showDetails">
-                <p class="card-text">Car Number: {{ car.carNumber }}</p>
-                <p class="card-text">Distance: {{ car.distance }}</p>
-                <p class="card-text">Price: {{ car.price }}</p>
-                <p class="card-text">Engine Power: {{ car.enginePower }}</p>
-                <p class="card-text">Battery Capacity: {{ car.batteryCapacity }}</p>
-                <form (ngSubmit)="onSubmit()">
-                  <label>
-                    Zile arenda:
-                    <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
-                    <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
-                    <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3" style="display: none;">
-                  </label>
-                  <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
-                </form>
-                <button class="btn btn-danger" *ngIf="getRolefromToken() === 'Admin'" (click)="deleteVehicle()">Delete vehicle</button>
-              </div>
+    <h3>Electric Cars:</h3>
+    <div class="row">
+      <div class="col-2 mb-3" *ngFor="let car of vehicle.hyElectricCars">
+        <div class="card">
+          <div class="card-body">
+            <div (click)="toggleVehicleDetails(car)">
+              <p class="card-text">ID: {{ car.id }}</p>
+              <p class="card-text">Brand: {{ car.brand }}</p>
+              <p class="card-text">Model: {{ car.model }}</p>
+              <p class="card-text">Year: {{ car.year }}</p>
+              <p class="card-text">
+                <span class="circle" [ngClass]="{'circle-green': car.state, 'circle-red': !car.state}"></span>
+                {{ car.state ? 'Disponibil' : 'Indisponibil' }}
+              </p><!-- Adăugare clasă CSS în funcție de starea mașinii -->
+              <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
+            </div>
+            <div *ngIf="car.showDetails">
+              <p class="card-text">Car Number: {{ car.carNumber }}</p>
+              <p class="card-text">Distance: {{ car.distance }}</p>
+              <p class="card-text">Price: {{ car.price }}</p>
+              <p class="card-text">Engine Power: {{ car.enginePower }}</p>
+              <p class="card-text">Battery Capacity: {{ car.batteryCapacity }}</p>
+              <form (ngSubmit)="onSubmit()">
+                <label>
+                  Zile arenda:
+                  <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
+                  <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
+                  <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3"
+                    style="display: none;">
+                </label>
+                <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
+              </form>
+              <button (click)="updateVehicleStatus()" class="btn btn-info"
+                *ngIf="getRolefromToken() === 'Admin'">UpdateStatus</button>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <h3>Electric Motorcycle:</h3>
-      <div class="row">
-        <div class="col-2 mb-3" *ngFor="let car of vehicle.electricMotorcycle">
-          <div class="card">
-            <div class="card-body">
-              <div (click)="toggleVehicleDetails(car)">
-                <p class="card-text">ID: {{ car.id }}</p>
-                <p class="card-text">Brand: {{ car.brand }}</p>
-                <p class="card-text">Model: {{ car.model }}</p>
-                <p class="card-text">Year: {{ car.year }}</p>
-                <p class="card-text" [ngClass]="{'text-success': car.state, 'text-danger': !car.state}">{{ car.state ? 'Disponibil' : 'Indisponibil' }}</p>
-                <!-- Adăugare clasă CSS în funcție de starea mașinii -->
-                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
-              </div>
-              <div *ngIf="car.showDetails">
-                <p class="card-text">Car Number: {{ car.carNumber }}</p>
-                <p class="card-text">Distance: {{ car.distance }}</p>
-                <p class="card-text">Price: {{ car.price }}</p>
-                <p class="card-text">Engine Power: {{ car.enginePower }}</p>
-                <p class="card-text">Battery Capacity: {{ car.batteryCapacity }}</p>
-                <form (ngSubmit)="onSubmit()">
-                  <label>
-                    Zile arenda:
-                    <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
-                    <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
-                    <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3" style="display: none;">
-                  </label>
-                  <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
-                </form>
-                <button class="btn btn-danger" *ngIf="getRolefromToken() === 'Admin'" (click)="deleteVehicle()">Delete vehicle</button>
-              </div>
+    <h3>Electric Motorcycle:</h3>
+    <div class="row">
+      <div class="col-2 mb-3" *ngFor="let car of vehicle.electricMotorcycle">
+        <div class="card">
+          <div class="card-body">
+            <div (click)="toggleVehicleDetails(car)">
+              <p class="card-text">ID: {{ car.id }}</p>
+              <p class="card-text">Brand: {{ car.brand }}</p>
+              <p class="card-text">Model: {{ car.model }}</p>
+              <p class="card-text">Year: {{ car.year }}</p>
+              <p class="card-text">
+                <span class="circle" [ngClass]="{'circle-green': car.state, 'circle-red': !car.state}"></span>
+                {{ car.state ? 'Disponibil' : 'Indisponibil' }}
+              </p> <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
+            </div>
+            <div *ngIf="car.showDetails">
+              <p class="card-text">Car Number: {{ car.carNumber }}</p>
+              <p class="card-text">Distance: {{ car.distance }}</p>
+              <p class="card-text">Price: {{ car.price }}</p>
+              <p class="card-text">Engine Power: {{ car.enginePower }}</p>
+              <p class="card-text">Battery Capacity: {{ car.batteryCapacity }}</p>
+              <form (ngSubmit)="onSubmit()">
+                <label>
+                  Zile arenda:
+                  <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
+                  <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
+                  <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3"
+                    style="display: none;">
+                </label>
+                <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
+              </form>
+              <button (click)="updateVehicleStatus()" class="btn btn-info"
+                *ngIf="getRolefromToken() === 'Admin'">UpdateStatus</button>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <h3>Combustion Motorcycle:</h3>
-      <div class="row">
-        <div class="col-2 mb-3" *ngFor="let car of vehicle.combustionMotorcycles">
-          <div class="card">
-            <div class="card-body">
-              <div (click)="toggleVehicleDetails(car)">
-                <p class="card-text">ID: {{ car.id }}</p>
-                <p class="card-text">Brand: {{ car.brand }}</p>
-                <p class="card-text">Model: {{ car.model }}</p>
-                <p class="card-text">Year: {{ car.year }}</p>
-                <p class="card-text" [ngClass]="{'text-success': car.state, 'text-danger': !car.state}">{{ car.state ? 'Disponibil' : 'Indisponibil' }}</p>
-                <!-- Adăugare clasă CSS în funcție de starea mașinii -->
-                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
-              </div>
-              <div *ngIf="car.showDetails">
-                <p class="card-text">Car Number: {{ car.carNumber }}</p>
-                <p class="card-text">Distance: {{ car.distance }}</p>
-                <p class="card-text">Price: {{ car.price }}</p>
-                <p class="card-text">Engine Power: {{ car.enginePower }}</p>
-                <form (ngSubmit)="onSubmit()">
-                  <label>
-                    Zile arenda:
-                    <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
-                    <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
-                    <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3" style="display: none;">
-                  </label>
-                  <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
-                </form>
-                <button class="btn btn-danger" *ngIf="getRolefromToken() === 'Admin'" (click)="deleteVehicle()">Delete vehicle</button>
-              </div>
+    <h3>Combustion Motorcycle:</h3>
+    <div class="row">
+      <div class="col-2 mb-3" *ngFor="let car of vehicle.combustionMotorcycles">
+        <div class="card">
+          <div class="card-body">
+            <div (click)="toggleVehicleDetails(car)">
+              <p class="card-text">ID: {{ car.id }}</p>
+              <p class="card-text">Brand: {{ car.brand }}</p>
+              <p class="card-text">Model: {{ car.model }}</p>
+              <p class="card-text">Year: {{ car.year }}</p>
+              <p class="card-text">
+                <span class="circle" [ngClass]="{'circle-green': car.state, 'circle-red': !car.state}"></span>
+                {{ car.state ? 'Disponibil' : 'Indisponibil' }}
+              </p><img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
+            </div>
+            <div *ngIf="car.showDetails">
+              <p class="card-text">Car Number: {{ car.carNumber }}</p>
+              <p class="card-text">Distance: {{ car.distance }}</p>
+              <p class="card-text">Price: {{ car.price }}</p>
+              <p class="card-text">Engine Power: {{ car.enginePower }}</p>
+              <form (ngSubmit)="onSubmit()">
+                <label>
+                  Zile arenda:
+                  <input type="text" [(ngModel)]="rentData.rentalDays" name="rentalDays">
+                  <input type="number" [(ngModel)]="rentData.CustomerId" name="CustomerId" style="display: none;">
+                  <input type="text" [(ngModel)]="rentData.vehicleTypes" name="vehicleTypes" [value]="3"
+                    style="display: none;">
+                </label>
+                <button class="btn btn-success" type="submit" *ngIf="getRolefromToken() === 'client'">Arenda</button>
+              </form>
+              <button class="btn btn-danger" *ngIf="getRolefromToken() === 'Admin'" (click)="deleteVehicle()">Delete
+                vehicle</button>
+              <button (click)="updateVehicleStatus()" class="btn btn-info"
+                *ngIf="getRolefromToken() === 'Admin'">UpdateStatus</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
-  
+</div>

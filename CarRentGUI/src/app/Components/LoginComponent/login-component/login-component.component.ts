@@ -68,7 +68,7 @@ export class LoginComponentComponent {
               this.loginService.storeToken(res.token)
               this.loginForm.reset()
               this.showSuccess()
-              this.router.navigate(['home'])
+              this.router.navigate(['home']);
             },
             error: (error) => {
               this.showError();

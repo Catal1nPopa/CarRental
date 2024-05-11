@@ -4,6 +4,7 @@ import { RentalsService } from '../../Services/rentals.service';
 import { RentModel } from '../../Models/RentModel';
 import { LoginService } from '../../Services/login.service';
 import { NgToastService } from 'ng-angular-popup';
+import { UpdateVehicleStatus } from '../../Models/UpdateVehicleStatus';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -12,9 +13,9 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class VehicleListComponent implements OnInit {
   vehicleList!: any[];
-  rentData: RentModel = new RentModel(110,110,110,"0");
+  rentData: RentModel = new RentModel(0,0,0,"0");
   userId: number = 0;
-  
+
   constructor(private vehicleService: VehicleService,
     private rentService: RentalsService,
     private authService: LoginService,
@@ -65,7 +66,7 @@ export class VehicleListComponent implements OnInit {
   }
 
   deleteVehicle(): void {
-    console.log("accesat")
+    // console.log("accesat")
     this.vehicleService.deleteVehicle(this.rentData.idCar, this.rentData.vehicleTypes)
       .subscribe(
         () => {
@@ -79,4 +80,19 @@ export class VehicleListComponent implements OnInit {
         }
       );
   }
+
+  
+  updateVehicleStatus(): void{
+    dataToUpdate.id = this.rentData.idCar;
+    dataToUpdate.vehicleType = this.rentData.vehicleTypes;
+    this.vehicleService.updateVehicleStatus(dataToUpdate).subscribe(response => {
+      console.log(response); // poți face orice cu răspunsul de la server
+    }, error => {
+      console.error(error); // gestionează erorile în mod corespunzător
+    });
+  }
 }
+const dataToUpdate: UpdateVehicleStatus = {
+  id: 0,
+  vehicleType: ""
+};

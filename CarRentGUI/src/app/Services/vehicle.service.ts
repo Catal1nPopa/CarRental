@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { RentModel } from '../Models/RentModel';
 import { Vehicle } from '../Models/Vehicle';
+import { UpdateVehicleStatus } from '../Models/UpdateVehicleStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,12 @@ export class VehicleService {
   createCar(carData: Vehicle): Observable<any> {
     return this.http.post<any>(this.addVehicleUrl, carData);
   }
+
+  private updateStatus = environment.apiUrl + "Mediatr/UpdateStatus";
+
+  updateVehicleStatus(UpdateVehicleStatus: UpdateVehicleStatus): Observable<any>{
+    // Trimiteți datele în corpul cererii HTTP
+    return this.http.patch<any>(environment.apiUrl + "Mediatr/UpdateStatus", UpdateVehicleStatus);
+  }
+  
 }
