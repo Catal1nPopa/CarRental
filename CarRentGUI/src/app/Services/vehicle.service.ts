@@ -38,5 +38,8 @@ export class VehicleService {
     // Trimiteți datele în corpul cererii HTTP
     return this.http.patch<any>(environment.apiUrl + "Mediatr/UpdateStatus", UpdateVehicleStatus);
   }
-  
+
+  getVehicle(data: UpdateVehicleStatus): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + "FacadeVehicles/GetById", data);
+  }
 }

@@ -37,7 +37,7 @@ namespace CarRentail.Application.Facade
             DeleteVehicle.DeleteData(_carRepository, id, types);
         }
 
-        public object GetVehicleById(int id, VehicleType.VehicleTypes types)
+        public object GetVehicleById(int id, string types)
         {
             return GetById.GetVehicle(_carRepository, id, types);
         }
@@ -61,6 +61,31 @@ namespace CarRentail.Application.Facade
         public List<CarInspection> GetAllInspectionCars()
         {
             return GetCarInspection.GetInspection(_carRepository);
+        }
+
+        public HybridCar getHybridCars(int id)
+        {
+            return _carRepository.GetHybridCarById(id);
+        }
+
+        public ElectricCar getElectricCars(int id)
+        {
+            return _carRepository.GetElectricCarById(id);
+        }
+
+        public CombustionCar getCombustionCars(int id)
+        {
+            return _carRepository.GetCombustionCarById(id);
+        }
+
+        public ElectricMotorcycle getElectricMotorcycles(int id)
+        {
+            return _carRepository.GetElectricMotorcycleById(id);
+        }
+
+        public CombustionMotorcycle getCombustionMotorcycles(int id)
+        {
+            return _carRepository.GetCombustionMotorcycleById(id);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CarRentail.Application.Models;
 using CarRentail.Application.Requests;
+using CarRentail.Application.Services;
 using CarRentail.Domain.Entities;
 using CarRentail.Domain.Enums;
 using MediatR;
@@ -19,16 +20,18 @@ namespace CarRentailAPI.Controllers
         }
 
         [HttpPost("CreateRentalMediatr")]
-        public async Task CreateRental([FromBody] RentModel dataRental) 
+        public async Task<IActionResult> CreateRental([FromBody] RentModel dataRental) 
         {
-            try
+            if (dataRental.rentalDays > 0)
             {
-                GetByIdVehicleRequest checkVehicle = new GetByIdVehicleRequest();
-                checkVehicle.Id = dataRental.idCar;
-                checkVehicle.vehicleType = dataRental.vehicleTypes;
-                Vehicle checkResponse = await _mediator.Send(checkVehicle);
+                try
+                {
+                    GetByIdVehicleRequest checkVehicle = new GetByIdVehicleRequest();
+                    checkVehicle.Id = dataRental.idCar;
+                    checkVehicle.vehicleType = dataRental.vehicleTypes;
+                    Vehicle checkResponse = await _mediator.Send(checkVehicle);
 
-                RentCarRequest dataRent = new RentCarRequest();
+                    RentCarRequest dataRent = new RentCarRequest();
                     dataRent.CustomerId = dataRental.CustomerId;
                     dataRent.CarNumber = checkResponse.CarNumber;
                     dataRent.VehicleId = dataRental.idCar;
@@ -44,19 +47,22 @@ namespace CarRentailAPI.Controllers
                     dataUpdate.vehicleTypes = dataRental.vehicleTypes;
 
                     var response = _mediator.Send(dataUpdate);
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            else
+              return BadRequest();
+            return BadRequest();
         }
 
         [HttpGet("GetRentals")]
         public Task<List<RentalProc>> GetRentalProc()
         {
             var request = new GetRentailsRequest();
-
-            // Send the request to the mediator
             var rentals =  _mediator.Send(request);
             return rentals;
         }
@@ -66,10 +72,27 @@ namespace CarRentailAPI.Controllers
         {
             try
             {
-                UpdateVehicleStatusRequest dataUpdate = new UpdateVehicleStatusRequest();
-                dataUpdate.idCar = dataUpdateVehicleStatus.Id;
-                dataUpdate.vehicleTypes = dataUpdateVehicleStatus.VehicleType;
-                var response = await _mediator.Send(dataUpdate);
+                var request = new GetRentailsRequest();
+                var rentals = await _mediator.Send(request);
+                RentalProc latestRental = null;
+
+                foreach (var rent in rentals)
+                {
+                    if (rent.VehicleId == dataUpdateVehicleStatus.Id && rent.VehicleType == dataUpdateVehicleStatus.VehicleType && rent.EndTime < DateTime.Now)
+                    {
+                        if (latestRental == null || rent.StarTime > latestRental.StarTime)
+                        {
+                            latestRental = rent;
+                        }
+                    }
+                }
+                if (latestRental != null)
+                {
+                    UpdateVehicleStatusRequest dataUpdate = new UpdateVehicleStatusRequest();
+                    dataUpdate.idCar = dataUpdateVehicleStatus.Id;
+                    dataUpdate.vehicleTypes = dataUpdateVehicleStatus.VehicleType;
+                    var response = await _mediator.Send(dataUpdate);
+                }
             }
             catch (Exception ex)
             {

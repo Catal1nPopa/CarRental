@@ -11,19 +11,19 @@ namespace CarRentail.Application.DBRequests
 {
     public class GetById
     {
-        public static object GetVehicle(IVehicleRepository _vehicleRepository, int id, VehicleType.VehicleTypes types)
+        public static object GetVehicle(IVehicleRepository _vehicleRepository, int id,string  types)
         {
             switch (types)
             {
-                case VehicleType.VehicleTypes.HybridCar:
+                case "0":
                     return _vehicleRepository.GetHybridCarById(id);
-                case VehicleType.VehicleTypes.CombustionCar:
+                case "1":
                     return _vehicleRepository.GetCombustionCarById(id);
-                case VehicleType.VehicleTypes.ElectricCar:
+                case "2":
                     return _vehicleRepository.GetElectricCarById(id);
-                case VehicleType.VehicleTypes.ElectricMotorcycle:
+                case "3":
                     return _vehicleRepository.GetElectricMotorcycleById(id);
-                case VehicleType.VehicleTypes.CombustionMotorcycle:
+                case "4":
                     return _vehicleRepository.GetCombustionMotorcycleById(id);
                 default:
                     throw new ArgumentException("Invalid vehicle type");

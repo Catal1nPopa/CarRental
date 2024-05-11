@@ -14,6 +14,8 @@ import { RentalListComponent } from './Components/rental-list/rental-list.compon
 import { NgToastModule } from 'ng-angular-popup';
 import { RegisterComponent } from './Components/LoginComponent/register/register.component';
 import { AddVehicleComponent } from './Components/add-vehicle/add-vehicle.component';
+import { MenuComponent } from './Components/menu/menu.component';
+import { AdminPageComponent } from './Components/admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AddVehicleComponent } from './Components/add-vehicle/add-vehicle.compon
     VehicleListComponent,
     RentalListComponent,
     RegisterComponent,
-    AddVehicleComponent
+    AddVehicleComponent,
+    MenuComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
