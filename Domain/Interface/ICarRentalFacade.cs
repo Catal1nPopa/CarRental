@@ -8,11 +8,18 @@ namespace CarRentail.Domain.Interface
     {
         void AddVehicleData(IVehicle data, string vehicleTypes);
         void RemoveVehicle(int id, VehicleType.VehicleTypes types);
-        object GetVehicleById(int id, VehicleType.VehicleTypes types);
+        object GetVehicleById(int id, string types);
         List<VehicleList> getAllVehicles();
         bool UpdateVehicles(int id, Vehicle data, VehicleType.VehicleTypes vehicleTypes);
 
         void AddInspectionCar(CarInspection carInspection, CarInspectionEnum typeInspection);
         List<CarInspection> GetAllInspectionCars();
+
+        HybridCar getHybridCars(int id);
+        ElectricCar getElectricCars(int id);
+        CombustionCar getCombustionCars(int id);
+        ElectricMotorcycle getElectricMotorcycles(int id);
+        CombustionMotorcycle getCombustionMotorcycles(int id);
+
     }
 }

@@ -1,0 +1,85 @@
+<div class="container">
+    <div>
+    <h3>Rentals</h3>
+<table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Id</th>
+        <th>Id client</th>
+        <th>Id vehicul</th>
+        <th>Tip vehicul</th>
+        <th>Număr mașină</th>
+        <th>Timp început</th>
+        <th>Timp sfârșit</th>
+        <th>Preț total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rental of rentals">
+        <td>{{ rental.id }}</td>
+        <td>{{ rental.customerId }}</td>
+        <td>{{ rental.vehicleId }}</td>
+        <td>{{ rental.vehicleType }}</td>
+        <td>{{ rental.carNumber }}</td>
+        <td>{{ rental.starTime | date:'yyyy-MM-dd' }}</td>
+        <td>{{ rental.endTime | date:'yyyy-MM-dd' }}</td>
+        <td>{{ rental.totalPrice }}</td>
+      </tr>
+    </tbody>
+  </table>
+    </div>
+
+    <div>
+        <h3>Inspections</h3>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Id</th>
+            <th>Descriere</th>
+            <th>Data</th>
+            <th>Număr mașină</th>
+            <th>Inspectie avansata</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inspection of inspections">
+            <td>{{ inspection.id }}</td>
+            <td>{{ inspection.description }}</td>
+            <td>{{ inspection.carNumber }}</td>
+            <td>{{ inspection.date | date:'yyyy-MM-dd' }}</td>
+            <td>{{ inspection.advanced }}</td>
+          </tr>
+        </tbody>
+      </table>
+        </div>
+</div>
+
+<form (ngSubmit)="getVehicle()" #carForm="ngForm">
+    <div class="form-group">
+        <label for="id">Id:</label>
+        <input type="number" class="form-control" id="id" name="id" [(ngModel)]="id" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="typeVehicle">Type:</label>
+        <input type="text" class="form-control" id="typeVehicle" name="typeVehicle" [(ngModel)]="typeVehicle" required>
+      </div>
+</form>
+<input>
+<button (click)="getVehicle()">cauta</button>
+<div *ngIf="vehicle">
+    <h2>{{ vehicle.brand }}</h2>
+    <img [src]="vehicle.photo" alt="Vehicle Photo">
+    <ul>
+      <li><strong>Brand:</strong> {{ vehicle.brand }}</li>
+      <li><strong>Car Number:</strong> {{ vehicle.carNumber }}</li>
+      <li><strong>Model:</strong> {{ vehicle.model }}</li>
+      <li><strong>Year:</strong> {{ vehicle.year }}</li>
+      <li><strong>Distance:</strong> {{ vehicle.distance }}</li>
+      <li><strong>Price:</strong> {{ vehicle.price }}</li>
+      <li><strong>Engine Power:</strong> {{ vehicle.enginePower }}</li>
+      <li><strong>Electric Power:</strong> {{ vehicle.electricPower }}</li>
+      <li ><strong>Battery Capacity:</strong> {{ vehicle.batteryCapacity }}</li>
+    </ul>
+  </div>
+  

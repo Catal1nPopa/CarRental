@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { VehicleService } from '../../Services/vehicle.service';
 import { RentalsService } from '../../Services/rentals.service';
 import { RentModel } from '../../Models/RentModel';
@@ -50,13 +50,13 @@ export class VehicleListComponent implements OnInit {
     this.rentService.createRental(this.rentData)
       .subscribe(
         response => {
+          this.toast.success({detail:"SUCCESS",summary:'Arenda cu succes',duration:5000});
           console.log("Rental created successfully:", response);
           this.getVehicles();
-          // Dacă dorești să faci ceva după ce rental-ul a fost creat cu succes, adaugă codul aici
         },
         error => {
+          this.toast.error({detail:"ERROR",summary:'Eroare la procesul de arenda',duration:5000});
           console.error("Error creating rental:", error);
-          // În cazul în care apare o eroare în timpul creării rental-ului, afișează un mesaj corespunzător către utilizator
         }
       );
   }
@@ -86,6 +86,7 @@ export class VehicleListComponent implements OnInit {
     dataToUpdate.id = this.rentData.idCar;
     dataToUpdate.vehicleType = this.rentData.vehicleTypes;
     this.vehicleService.updateVehicleStatus(dataToUpdate).subscribe(response => {
+      window.location.reload();
       console.log(response); // poți face orice cu răspunsul de la server
     }, error => {
       console.error(error); // gestionează erorile în mod corespunzător

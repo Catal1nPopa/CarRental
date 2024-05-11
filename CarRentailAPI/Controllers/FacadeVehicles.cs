@@ -46,19 +46,26 @@ namespace CarRentailAPI.Controllers
         //    return res;
         //}
 
-        [HttpPost("Facade GetById")]
-        public object GetVehicleById(int id, VehicleType.VehicleTypes vehicleType)
+        [HttpPost("GetById")]
+        public object GetVehicleById([FromBody] UpdateVehicleStatus data)
         {
-            var dataVehicle = _carRentalFacade.GetVehicleById(id, vehicleType);
-            if (dataVehicle != null)
+            switch (data.VehicleType)
             {
-                return dataVehicle;
-            }
-            else
-            {
-                return "Datele nu au fost gasite";
+                case "0":
+                    return _carRentalFacade.getHybridCars(data.Id);
+                case "2":
+                    return _carRentalFacade.getElectricCars(data.Id);
+                case "1":
+                    return _carRentalFacade.getCombustionCars(data.Id);
+                case "3":
+                    return _carRentalFacade.getElectricMotorcycles(data.Id);
+                case "4":
+                    return _carRentalFacade.getCombustionMotorcycles(data.Id);
+                default:
+                    throw new ArgumentException("Invalid vehicle type");
             }
         }
+
 
         [HttpPost("AddVehicle")]
         public void AddObject(AddNewVehicle data)
