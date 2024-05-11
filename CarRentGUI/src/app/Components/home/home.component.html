@@ -1,9 +1,7 @@
 <button (click)="logout()">logout</button>
 
-<div *ngIf="getRolefromToken() === 'Admin'">
-    <button class="btn btn-primary" (click)="showCarForm()">Adaugă vehicul</button>
-    <app-add-vehicle *ngIf="displayCarForm" ></app-add-vehicle>
-</div>
+<app-add-vehicle  ></app-add-vehicle>
+
 <div class="container">
     <app-vehicle-list></app-vehicle-list>
 

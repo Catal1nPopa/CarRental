@@ -61,6 +61,21 @@ namespace CarRentailAPI.Controllers
             return rentals;
         }
 
-    
+        [HttpPatch("UpdateStatus")]
+        public async Task UpdateStatusVehicle([FromBody] UpdateVehicleStatus dataUpdateVehicleStatus)
+        {
+            try
+            {
+                UpdateVehicleStatusRequest dataUpdate = new UpdateVehicleStatusRequest();
+                dataUpdate.idCar = dataUpdateVehicleStatus.Id;
+                dataUpdate.vehicleTypes = dataUpdateVehicleStatus.VehicleType;
+                var response = await _mediator.Send(dataUpdate);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            };
+        }
     }
 }

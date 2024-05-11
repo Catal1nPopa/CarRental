@@ -1,0 +1,42 @@
+.circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .circle-green {
+    background-color: green;
+  }
+  
+  .circle-red {
+    background-color: red;
+  }
+  
+
+  p{
+    font-size: 9pt;
+  }
+
+.id_class{
+    font-size: 7pt;
+}
+
+.card-text-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card-text-left {
+    flex: 1;
+  }
+  
+  .card-text-right {
+    flex: 1;
+    text-align: right;
+  }
+  
+img{
+    margin-top: -14px;
+}

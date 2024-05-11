@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../../Models/Vehicle';
 import { VehicleService } from '../../Services/vehicle.service';
+import { LoginService } from '../../Services/login.service';
 
 
 @Component({
@@ -10,8 +11,11 @@ import { VehicleService } from '../../Services/vehicle.service';
 })
 export class AddVehicleComponent implements OnInit {
   car: Vehicle = new Vehicle(0, '', '', '', 0, 0, '', 0, 0, 0, 0, ''); 
-
-  constructor(private vehicleService: VehicleService) { }
+  displayCarForm: boolean = false;
+  
+  constructor(private vehicleService: VehicleService,
+   private loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -23,5 +27,12 @@ export class AddVehicleComponent implements OnInit {
     }, error => {
       console.error('Error creating car:', error);
     });
+  }
+  showCarForm() {
+    this.displayCarForm = !this.displayCarForm; 
+     }
+  
+  getRolefromToken(){
+    return this.loginService.getRolefromToken();
   }
 }
