@@ -333,5 +333,40 @@ namespace CarRentail.Infrastructure.Repositories
         {
            return _context.Users.FirstOrDefault(v => v.username == dataUser.username);
         }
+
+        public void UpdateUser(User dataUser)
+        {
+            var userToUpdate = _context.Users.FirstOrDefault(u => u.Id == dataUser.Id);
+
+            if (userToUpdate != null)
+            {
+                userToUpdate.password = dataUser.password;
+
+                _context.SaveChanges();
+            }
+        }
+
+        //clients
+
+        public void AddClient(Client client)
+        {
+            _context.Clients.Add(client);
+            _context.SaveChanges();
+        }
+
+        public void UpdateClientRentals(int client)
+        {
+            var clientToUpdate = _context.Clients.FirstOrDefault(u => u.Id == client);
+            if (clientToUpdate != null)
+            {
+                clientToUpdate.rentalCars++;
+                _context.SaveChanges();
+            }
+        }
+
+        public Client GetClient(Client client)
+        {
+            return _context.Clients.FirstOrDefault(v => v.Name == client.Name);
+        }
     }
 }

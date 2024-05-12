@@ -7,12 +7,13 @@ import { LoginService } from '../../Services/login.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
   constructor(private loginService: LoginService
   ){}
 
  
-
+  ngOnInit(): void {
+  
+  }
   logout(){
     this.loginService.logOut();
   }

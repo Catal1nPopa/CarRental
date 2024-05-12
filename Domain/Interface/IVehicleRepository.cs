@@ -47,6 +47,12 @@ namespace CarRentail.Domain.Interface
         void AddUser(User user);
         User GetUser(User user);
 
+        void UpdateUser(User user);
+
+        //Clients
+        void AddClient(Client client);
+        void UpdateClientRentals(int client);
+        Client GetClient(Client client);
 
     }
 }

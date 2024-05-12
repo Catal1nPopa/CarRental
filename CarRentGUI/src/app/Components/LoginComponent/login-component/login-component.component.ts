@@ -13,7 +13,7 @@ export class LoginComponentComponent {
 
   loginForm!: FormGroup;
   registerForm!: FormGroup;
-  isLoginFormVisible: boolean = true;
+  isLoginFormVisible: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router,
     private toast : NgToastService
@@ -24,6 +24,7 @@ export class LoginComponentComponent {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.toggleForm();
 
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],

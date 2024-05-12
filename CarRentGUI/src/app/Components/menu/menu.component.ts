@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../../Services/login.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,26 +8,22 @@ import { Router } from '@angular/router';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  public userNameLabel: string = '';
+  constructor(private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
+    this.getName()
   }
 
-  hamburgerOpen = false;
 
-  toggleHamburger(): void {
-    this.hamburgerOpen = !this.hamburgerOpen;
+  logout(){
+    this.loginService.logOut();
   }
 
-  onHamburgerItemClick() {
-    if (this.hamburgerOpen) {
-      this.hamburgerOpen = false;
-    }
+  getName() {
+    const userName = this.loginService.getNameFroToken();
+    this.userNameLabel = userName;
+    console.log(this.userNameLabel);
   }
-
-  navigateTo(path: string) {
-    this.hamburgerOpen = false;
-    this.router.navigate([path]);
-  }
+  
 }

@@ -6,5 +6,6 @@ namespace CarRentail.Application.Services
     {
         Task<string> login(User  user);
         Task<string> register(User user);
+        Task<string> updatePassword(User user);
     }
 }

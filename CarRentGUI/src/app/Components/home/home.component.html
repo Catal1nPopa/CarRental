@@ -1,13 +1,12 @@
 <div class="backgroundImage"></div>
-<!-- <app-menu></app-menu> -->
-<button (click)="logout()">logout</button>
+<app-menu></app-menu>
 
-<app-add-vehicle  ></app-add-vehicle>
-
-<div class="container">
-    <app-vehicle-list></app-vehicle-list>
-
+<div class="container" style="position: relative;">
+<app-add-vehicle  style="position: absolute; top: 100px; left: -250px;"></app-add-vehicle>
+</div>
+<div class="container" style="position: relative;">
+    <app-vehicle-list style="position: absolute; top: 100px;"></app-vehicle-list>
 </div>
 
 
-<!-- <app-rental-list></app-rental-list> -->
+

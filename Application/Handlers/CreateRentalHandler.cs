@@ -29,6 +29,8 @@ namespace CarRentail.Application.Handlers
             data.EndTime = request.EndTime;
             data.TotalPrice = request.TotalPrice;
 
+            _carRepository.UpdateClientRentals(request.CustomerId);
+
             _carRepository.AddRentalRegistration(data);
             return data;
         }
