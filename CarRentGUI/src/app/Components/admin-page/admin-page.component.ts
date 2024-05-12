@@ -53,6 +53,10 @@ export class AdminPageComponent {
       console.error(error); // gestionează erorile în mod corespunzător
     });
   }
+
+  convertToBase64(photo: string): string {
+    return 'data:image/png;base64,' + photo;
+  }
 }
 const dataToUpdate: UpdateVehicleStatus = {
   id: 0,

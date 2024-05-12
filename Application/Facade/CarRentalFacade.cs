@@ -1,6 +1,7 @@
 ﻿using CarRentail.Domain.Entities;
 using CarRentail.Domain.Interface;
 using CarRentail.Application.DBRequests;
+using CarRentail.Domain.Entities.Auth;
 using CarRentail.Domain.Enums;
 using CarRentail.Infrastructure.Repositories;
 
@@ -87,5 +88,10 @@ namespace CarRentail.Application.Facade
         {
             return _carRepository.GetCombustionMotorcycleById(id);
         }
+
+        //public List<Client> getAllClients()
+        //{
+
+        //}
     }
 }

@@ -20,8 +20,9 @@ namespace CarRentailAPI.Controllers
         }
 
         [HttpPost("CreateRentalMediatr")]
-        public async Task<IActionResult> CreateRental([FromBody] RentModel dataRental) 
+        public async Task<IActionResult> CreateRental([FromBody] RentModel dataRental)
         {
+            bool checkRentAvailable;
             if (dataRental.rentalDays > 0)
             {
                 try
@@ -30,6 +31,19 @@ namespace CarRentailAPI.Controllers
                     checkVehicle.Id = dataRental.idCar;
                     checkVehicle.vehicleType = dataRental.vehicleTypes;
                     Vehicle checkResponse = await _mediator.Send(checkVehicle);
+
+                    var request = new GetRentailsRequest();
+                    var rentals = await _mediator.Send(request);
+
+                    foreach (var rent in rentals)
+                    {
+                        if (rent.VehicleId == dataRental.idCar && rent.VehicleType == dataRental.vehicleTypes &&
+                            rent.EndTime > DateTime.Now)
+                        {
+                            return BadRequest();
+                        }
+                    }
+
 
                     RentCarRequest dataRent = new RentCarRequest();
                     dataRent.CustomerId = dataRental.CustomerId;

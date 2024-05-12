@@ -1,0 +1,56 @@
+.navbar {
+    width: 100%;
+    height: 60px;
+    background-color: black; /* Adjust the color to match your design */
+    padding: 0; /* Remove padding if you want the navbar to stretch fully */
+    position: fixed;
+  }
+  
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    padding: 0 20px; /* You can adjust the padding to your liking */
+    width: 100%;
+    height: 60px;
+  }
+  
+  .navbar-title {
+    flex-grow: 0; /* Acest element va ocupa spațiul liber pentru a fi centrat */
+    text-align: center; /* Aliniază textul în centrul div-ului */
+    color: white;
+  }
+  .navbar-links {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    flex-grow: 1; 
+  }
+  
+  .navbar button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px; /* Adjust padding to your liking */
+  }
+  
+  .navbar button:hover {
+    text-decoration: underline;
+  }
+  
+  .logo-button img, .settings-button img {
+    height: 40px; /* Adjust the size according to your design */
+  }
+  
+  .active {
+    text-decoration: underline;
+  }
+  
+  /* Ensure that the body has no margin to allow the navbar to stretch fully */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  

@@ -19,11 +19,11 @@ namespace CarRentailAPI.Controllers
                 if (!token.Equals("error"))
                 {
 
-                return Ok(new
-                {
-                    token,
-                    Message = "Login Success"
-                });
+                    return Ok(new
+                    {
+                        token,
+                        Message = "Login Success"
+                    });
                 }
                 else
                 {
@@ -48,6 +48,22 @@ namespace CarRentailAPI.Controllers
                if (req.Equals("existent"))
                    return BadRequest();
                else
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("SchimbareParola")]
+        public async Task<IActionResult> UpdatePassword([FromBody] User user)
+        {
+            if (user.username.IsNullOrEmpty())
+                return BadRequest();
+            try
+            {
+                var update = await userServices.updatePassword(user);
                 return Ok();
             }
             catch (Exception ex)

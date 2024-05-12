@@ -1,0 +1,15 @@
+<nav class="navbar">
+    <div class="navbar-container">
+      <button class="logo-button"  routerLink="/main">
+        <img src="../../../assets/logo3.jpg" alt="TopRental" style="filter: invert(1);">
+      </button>
+      <div class="navbar-title">TopRental</div> <!-- Adăugăm titlul aici -->
+      <div class="navbar-links">
+        <button [routerLink]="['/adminPage']" style="color: rgb(9, 133, 182);">Admin Page</button>
+        <!-- <button>TopRental</button> -->
+        <h5 id="userNameLabel" style="margin-top: 5px; color: rgb(9, 133, 182)"> {{userNameLabel}}</h5>
+        <button (click)="logout()" style="color: red;">logout</button>
+      </div>
+    </div>
+  </nav>
+  

@@ -16,7 +16,6 @@ import { RegisterComponent } from './Components/LoginComponent/register/register
 import { AddVehicleComponent } from './Components/add-vehicle/add-vehicle.component';
 import { MenuComponent } from './Components/menu/menu.component';
 import { AdminPageComponent } from './Components/admin-page/admin-page.component';
-
 @NgModule({
   declarations: [
     AppComponent,
