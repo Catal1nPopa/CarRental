@@ -44,7 +44,6 @@ namespace CarRentailAPI.Controllers
                         }
                     }
 
-
                     RentCarRequest dataRent = new RentCarRequest();
                     dataRent.CustomerId = dataRental.CustomerId;
                     dataRent.CarNumber = checkResponse.CarNumber;

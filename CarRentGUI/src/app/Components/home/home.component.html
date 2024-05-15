@@ -2,7 +2,7 @@
 <app-menu></app-menu>
 
 <div class="container" style="position: relative;">
-<app-add-vehicle  style="position: absolute; top: 100px; left: -250px;"></app-add-vehicle>
+<app-add-vehicle *ngIf="getRolefromToken() === 'Admin'"  style="position: absolute; top: 100px; left: -250px;"></app-add-vehicle>
 </div>
 <div class="container" style="position: relative;">
     <app-vehicle-list style="position: absolute; top: 100px;"></app-vehicle-list>
