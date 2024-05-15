@@ -21,9 +21,12 @@ export class MenuComponent implements OnInit {
   }
 
   getName() {
-    const userName = this.loginService.getNameFroToken();
+    const userName = this.loginService.getUserName();
     this.userNameLabel = userName;
-    console.log(this.userNameLabel);
+  }
+
+  getRole(){
+    return this.loginService.getUserRole();
   }
   
 }

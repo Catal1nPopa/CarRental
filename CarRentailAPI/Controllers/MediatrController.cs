@@ -1,9 +1,11 @@
-﻿using CarRentail.Application.Models;
+﻿using CarRentail.Application.Mediator;
+using CarRentail.Application.Models;
 using CarRentail.Application.Requests;
 using CarRentail.Application.Services;
 using CarRentail.Domain.Entities;
 using CarRentail.Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,62 +24,38 @@ namespace CarRentailAPI.Controllers
         [HttpPost("CreateRentalMediatr")]
         public async Task<IActionResult> CreateRental([FromBody] RentModel dataRental)
         {
-            bool checkRentAvailable;
-            if (dataRental.rentalDays > 0)
+            try
             {
-                try
-                {
-                    GetByIdVehicleRequest checkVehicle = new GetByIdVehicleRequest();
-                    checkVehicle.Id = dataRental.idCar;
-                    checkVehicle.vehicleType = dataRental.vehicleTypes;
-                    Vehicle checkResponse = await _mediator.Send(checkVehicle);
-
-                    var request = new GetRentailsRequest();
-                    var rentals = await _mediator.Send(request);
-
-                    foreach (var rent in rentals)
-                    {
-                        if (rent.VehicleId == dataRental.idCar && rent.VehicleType == dataRental.vehicleTypes &&
-                            rent.EndTime > DateTime.Now)
-                        {
-                            return BadRequest();
-                        }
-                    }
-
-                    RentCarRequest dataRent = new RentCarRequest();
-                    dataRent.CustomerId = dataRental.CustomerId;
-                    dataRent.CarNumber = checkResponse.CarNumber;
-                    dataRent.VehicleId = dataRental.idCar;
-                    dataRent.VehicleType = dataRental.vehicleTypes;
-                    dataRent.StarTime = DateTime.Today;
-                    dataRent.EndTime = DateTime.Today.AddDays(dataRental.rentalDays);
-                    dataRent.TotalPrice = await _mediator.Send(new GetStrategyPriceRequest(dataRental.rentalDays));
-
-                    var res = _mediator.Send(dataRent);
-
-                    UpdateVehicleStatusRequest dataUpdate = new UpdateVehicleStatusRequest();
-                    dataUpdate.idCar = dataRental.idCar;
-                    dataUpdate.vehicleTypes = dataRental.vehicleTypes;
-
-                    var response = _mediator.Send(dataUpdate);
+                var response = await CreateNewRental.Create(dataRental, _mediator);
+                if (response)
                     return Ok();
-                }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine(ex.Message);
+                    return BadRequest();
                 }
+
             }
-            else
-              return BadRequest();
-            return BadRequest();
+            catch (Exception ex)
+            {
+                SendEmail.SendEmailException(ex, _mediator);
+                return BadRequest();
+            }
         }
 
         [HttpGet("GetRentals")]
         public Task<List<RentalProc>> GetRentalProc()
         {
-            var request = new GetRentailsRequest();
-            var rentals =  _mediator.Send(request);
-            return rentals;
+            try
+            {
+                var request = new GetRentailsRequest();
+                var rentals = _mediator.Send(request);
+                return rentals;
+            }
+            catch (Exception ex)
+            {
+                SendEmail.SendEmailException(ex, _mediator);
+                return null;
+            }
         }
 
         [HttpPatch("UpdateStatus")]
@@ -91,26 +69,32 @@ namespace CarRentailAPI.Controllers
 
                 foreach (var rent in rentals)
                 {
-                    if (rent.VehicleId == dataUpdateVehicleStatus.Id && rent.VehicleType == dataUpdateVehicleStatus.VehicleType && rent.EndTime < DateTime.Now)
+                    if (rent.VehicleId == dataUpdateVehicleStatus.Id && rent.VehicleType == dataUpdateVehicleStatus.VehicleType )
                     {
-                        if (latestRental == null || rent.StarTime > latestRental.StarTime)
+                        if (latestRental == null || rent.EndTime > latestRental.EndTime)
                         {
                             latestRental = rent;
                         }
                     }
                 }
+
+                var checkStatus = await GetVehicleData.getVehicle(dataUpdateVehicleStatus.Id,
+                    dataUpdateVehicleStatus.VehicleType, _mediator);
                 if (latestRental != null)
                 {
-                    UpdateVehicleStatusRequest dataUpdate = new UpdateVehicleStatusRequest();
-                    dataUpdate.idCar = dataUpdateVehicleStatus.Id;
-                    dataUpdate.vehicleTypes = dataUpdateVehicleStatus.VehicleType;
-                    var response = await _mediator.Send(dataUpdate);
+                    if (latestRental.EndTime < DateTime.Now && !checkStatus.State)
+                    {
+                        UpdateVehicleStatusRequest dataUpdate = new UpdateVehicleStatusRequest();
+                        dataUpdate.idCar = dataUpdateVehicleStatus.Id;
+                        dataUpdate.vehicleTypes = dataUpdateVehicleStatus.VehicleType;
+                        var response = await _mediator.Send(dataUpdate);
+                    }
                 }
             }
             catch (Exception ex)
             {
+                SendEmail.SendEmailException(ex, _mediator);
                 Console.WriteLine(ex.Message);
-
             };
         }
     }

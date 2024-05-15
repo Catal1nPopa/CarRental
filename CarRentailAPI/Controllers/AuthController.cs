@@ -1,5 +1,8 @@
-﻿using CarRentail.Application.Services;
+﻿using CarRentail.Application.Mediator;
+using CarRentail.Application.Requests;
+using CarRentail.Application.Services;
 using CarRentail.Domain.Entities.Auth;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -7,8 +10,9 @@ namespace CarRentailAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IUserServices userServices) : ControllerBase
+    public class AuthController(IUserServices userServices, IMediator mediator) : ControllerBase
     {
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] UserModel userModel)
         {
@@ -32,6 +36,7 @@ namespace CarRentailAPI.Controllers
             }
             catch (Exception ex)
             {
+                SendEmail.SendEmailException(ex, mediator);
                 return BadRequest(ex.Message);
             }
         }
@@ -52,6 +57,7 @@ namespace CarRentailAPI.Controllers
             }
             catch (Exception ex)
             {
+                SendEmail.SendEmailException(ex, mediator);
                 return BadRequest(ex.Message);
             }
         }
@@ -68,6 +74,7 @@ namespace CarRentailAPI.Controllers
             }
             catch (Exception ex)
             {
+                SendEmail.SendEmailException(ex, mediator);
                 return BadRequest(ex.Message);
             }
         }

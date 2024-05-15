@@ -69,5 +69,10 @@ input[type=number] {
 	border-radius: .2em .2em 0 0;
 	padding: .4em;
 	color: #010102;
-    width: 50px;
+    width: 130px;
 }
+
+.card-body img {
+  height: 150px; /* Setează înălțimea imaginilor la 200px sau orice valoare dorești */
+}
+

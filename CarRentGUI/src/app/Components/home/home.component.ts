@@ -19,6 +19,6 @@ export class HomeComponent {
   }
 
   getRolefromToken(){
-    return this.loginService.getRolefromToken();
+    return this.loginService.getUserRole();
   }
 }
