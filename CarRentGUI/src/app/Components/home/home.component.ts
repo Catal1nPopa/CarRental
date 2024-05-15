@@ -18,4 +18,7 @@ export class HomeComponent {
     this.loginService.logOut();
   }
 
+  getRolefromToken(){
+    return this.loginService.getRolefromToken();
+  }
 }

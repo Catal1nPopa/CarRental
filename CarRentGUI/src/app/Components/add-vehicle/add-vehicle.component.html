@@ -1,5 +1,5 @@
 <!-- car-form.component.html -->
-<div *ngIf="getRolefromToken() === 'Admin'">
+<div>
   <button class="btn btn-primary" (click)="showCarForm()">Adaugă vehicul</button>
 <div *ngIf="displayCarForm">
   <form (ngSubmit)="submitForm()" #carForm="ngForm">
