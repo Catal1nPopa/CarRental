@@ -50,19 +50,19 @@ export class VehicleListComponent implements OnInit {
     this.rentService.createRental(this.rentData)
       .subscribe(
         response => {
-          this.toast.success({detail:"SUCCESS",summary:'Arenda cu succes',duration:5000});
+          this.toast.success({detail:"SUCCESS",summary:'Arenda cu succes \nVa asteptam la oficiu pentru a prelua vehicolul',duration:10000});
           console.log("Rental created successfully:", response);
           this.getVehicles();
         },
         error => {
-          this.toast.error({detail:"ERROR",summary:'Eroare la procesul de arenda',duration:5000});
+          this.toast.error({detail:"ERROR",summary:'Masina nu este disponibila',duration:5000});
           console.error("Error creating rental:", error);
         }
       );
   }
 
   getRolefromToken(){
-    return this.authService.getRolefromToken();
+    return this.authService.getUserRole();
   }
 
   deleteVehicle(): void {

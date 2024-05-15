@@ -39,14 +39,62 @@ namespace CarRentail.Application.Handlers
                     newData.ElectricPower = data.ElectricPower;
                     newData.State = data.State;
                     return newData;
-                //case "1":
-                //    return await Task.FromResult<object>(_vehicleRepository.GetCombustionCarById(request.Id));
-                //case "2":
-                //    return await Task.FromResult<object>(_vehicleRepository.GetElectricCarById(request.Id));
-                //case "3":
-                //    return await Task.FromResult<object>(_vehicleRepository.GetElectricMotorcycleById(request.Id));
-                //case "4":
-                //    return await Task.FromResult<object>(_vehicleRepository.GetCombustionMotorcycleById(request.Id));
+                case "1":
+                    var dataCombustionCar = _vehicleRepository.GetCombustionCarById(request.Id);
+                    Vehicle newDataCombustionCar = new Vehicle();
+                    newDataCombustionCar.Id = dataCombustionCar.Id;
+                    newDataCombustionCar.CarNumber = dataCombustionCar.CarNumber;
+                    newDataCombustionCar.Model = dataCombustionCar.Model;
+                    newDataCombustionCar.Brand = dataCombustionCar.Brand;
+                    newDataCombustionCar.Year = dataCombustionCar.Year;
+                    newDataCombustionCar.Photo = dataCombustionCar.Photo;
+                    newDataCombustionCar.Price = dataCombustionCar.Price;
+                    newDataCombustionCar.EnginePower = dataCombustionCar.EnginePower;
+                    newDataCombustionCar.State = dataCombustionCar.State;
+                    return newDataCombustionCar;
+                case "2":
+                    var dataElectricCar = _vehicleRepository.GetElectricCarById(request.Id);
+                    Vehicle newDataElectricCar = new Vehicle();
+                    newDataElectricCar.Id = dataElectricCar.Id;
+                    newDataElectricCar.CarNumber = dataElectricCar.CarNumber;
+                    newDataElectricCar.Model = dataElectricCar.Model;
+                    newDataElectricCar.Brand = dataElectricCar.Brand;
+                    newDataElectricCar.Year = dataElectricCar.Year;
+                    newDataElectricCar.Photo = dataElectricCar.Photo;
+                    newDataElectricCar.Price = dataElectricCar.Price;
+                    newDataElectricCar.EnginePower = dataElectricCar.EnginePower;
+                    newDataElectricCar.BatteryCapacity = dataElectricCar.BatteryCapacity;
+                    newDataElectricCar.ElectricPower = dataElectricCar.BatteryCapacity;
+                    newDataElectricCar.State = dataElectricCar.State;
+                    return newDataElectricCar;
+                case "3":
+                    var dataElectricMotorcycle = _vehicleRepository.GetElectricMotorcycleById(request.Id);
+                    Vehicle newDataElectricMotorcycle = new Vehicle();
+                    newDataElectricMotorcycle.Id = dataElectricMotorcycle.Id;
+                    newDataElectricMotorcycle.CarNumber = dataElectricMotorcycle.CarNumber;
+                    newDataElectricMotorcycle.Model = dataElectricMotorcycle.Model;
+                    newDataElectricMotorcycle.Brand = dataElectricMotorcycle.Brand;
+                    newDataElectricMotorcycle.Year = dataElectricMotorcycle.Year;
+                    newDataElectricMotorcycle.Photo = dataElectricMotorcycle.Photo;
+                    newDataElectricMotorcycle.Price = dataElectricMotorcycle.Price;
+                    newDataElectricMotorcycle.EnginePower = dataElectricMotorcycle.EnginePower;
+                    newDataElectricMotorcycle.BatteryCapacity = dataElectricMotorcycle.BatteryCapacity;
+                    newDataElectricMotorcycle.ElectricPower = dataElectricMotorcycle.BatteryCapacity;
+                    newDataElectricMotorcycle.State = dataElectricMotorcycle.State;
+                    return newDataElectricMotorcycle;
+                case "4":
+                    var dataCombustionMotorcycle = _vehicleRepository.GetCombustionMotorcycleById(request.Id);
+                    Vehicle newDataCombustionMotorcycle = new Vehicle();
+                    newDataCombustionMotorcycle.Id = dataCombustionMotorcycle.Id;
+                    newDataCombustionMotorcycle.CarNumber = dataCombustionMotorcycle.CarNumber;
+                    newDataCombustionMotorcycle.Model = dataCombustionMotorcycle.Model;
+                    newDataCombustionMotorcycle.Brand = dataCombustionMotorcycle.Brand;
+                    newDataCombustionMotorcycle.Year = dataCombustionMotorcycle.Year;
+                    newDataCombustionMotorcycle.Photo = dataCombustionMotorcycle.Photo;
+                    newDataCombustionMotorcycle.Price = dataCombustionMotorcycle.Price;
+                    newDataCombustionMotorcycle.EnginePower = dataCombustionMotorcycle.EnginePower;
+                    newDataCombustionMotorcycle.State = dataCombustionMotorcycle.State;
+                    return newDataCombustionMotorcycle;
                 default:
                     throw new ArgumentException("Invalid vehicle type");
             }

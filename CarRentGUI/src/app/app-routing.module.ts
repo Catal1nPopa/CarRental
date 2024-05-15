@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: LoginComponentComponent},
   { path: "login", component: LoginComponentComponent },
   { path: "register", component: RegisterComponent },
-  { path: "adminPage", component: AdminPageComponent },
+  { path: "adminPage", component: AdminPageComponent, canActivate: [authGuard] },
   { path: "home", component: HomeComponent, canActivate: [authGuard]}
 ];
 
