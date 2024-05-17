@@ -28,7 +28,7 @@ namespace CarRentail.Application
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
                 Subject = identity,
-                Expires = DateTime.Now.AddMinutes(15),
+                Expires = DateTime.Now.AddMinutes(1),
                 SigningCredentials = credentials
             };
 

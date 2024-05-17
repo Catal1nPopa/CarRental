@@ -33,3 +33,38 @@
     padding: 5px 10px;
   }
   
+  input[type=text] {
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: .2em solid #0585b8;
+    background: rgba(#0585b8, .2);
+    border-radius: .2em .2em 0 0;
+    padding: .4em;
+    color: #010102;
+      width: 250px;
+  }
+  
+  .profile-and-rentals-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.profile-container {
+  width: 300px; 
+  margin-right: 20px; 
+  margin-bottom: 20px; 
+}
+
+.container {
+  flex: 1 1 500px; 
+  margin-right: 20px; 
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .profile-container, .container {
+      flex-basis: 100%;
+      max-width: none; 
+  }
+}

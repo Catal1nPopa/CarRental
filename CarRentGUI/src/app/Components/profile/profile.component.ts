@@ -6,6 +6,7 @@ import { LoginService } from '../../Services/login.service';
 import { userData } from '../../Models/UpdatePassword';
 import { NgToastService } from 'ng-angular-popup';
 import { RentalsService } from '../../Services/rentals.service';
+import { ClientsService } from '../../Services/clients.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,16 +18,21 @@ export class ProfileComponent implements OnInit{
   updatePass: userData = new userData(0,"", "","");
   rentals: any[] = [];
   customerId: number = 0;
+  clientData: any;
+
+  rentalFilter = '';
 
   constructor(private profileService : ProfileService,
     private loginService: LoginService,
     private toast : NgToastService,
-    private rentalsService : RentalsService
+    private rentalsService : RentalsService,
+    private clientService : ClientsService
   ){}
 
   ngOnInit(): void {
     this.getUser();
     this.fetchRentals(this.customerId);
+    this.getClientData();
   }
 
   fetchRentals(id: number) {
@@ -67,7 +73,12 @@ export class ProfileComponent implements OnInit{
 
   deleteRental(id:number){
     this.rentalsService.deleteRentals(id).subscribe((res : any) => {
-      console.log(res);
         });
+  }
+
+  getClientData(): any{
+    console.log(this.clientService.getClient(this.updatePass.username).subscribe((res: any) => {
+      this.clientData = res;
+    }));
   }
 }

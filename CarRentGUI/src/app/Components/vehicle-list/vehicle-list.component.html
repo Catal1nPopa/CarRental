@@ -1,9 +1,10 @@
+<input type="text" placeholder="Căutare vehicol" [(ngModel)]="vehicleFilter" class="form-control mb-2">
 
 <div class="row">
   <div class="col-12" *ngFor="let vehicle of vehicleList">
-    <h3>Masini hybrid</h3>
+    <h3>Mașini hybrid</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.hybridCars">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.hybridCars | filter:vehicleFilter">
         <div class="card border-box">
           <div class="card-body" >
             <div >
@@ -32,10 +33,10 @@
               </div>
             </div>
             <div *ngIf="car.showDetails">
-              <p class="card-text">Numar masina: {{ car.carNumber }}</p>
-              <p class="card-text">Distanta: {{ car.distance }} km</p>
+              <p class="card-text">Număr mașină: {{ car.carNumber }}</p>
+              <p class="card-text">Parcurs: {{ car.distance }} km</p>
               <p class="card-text">Putere motor: {{ car.enginePower }}</p>
-              <p class="card-text">Putere electrica : {{ car.electricPower }}</p>
+              <p class="card-text">Putere electrică : {{ car.electricPower }}</p>
               <form (ngSubmit)="onSubmit()" *ngIf="getRolefromToken() === 'client'">
                 <label>
                   Zile arenda:
@@ -49,9 +50,9 @@
               </form>
               <div class="card-text-row" *ngIf="getRolefromToken() === 'Admin'" style="padding-top: 20px;">
 
-                <button class="btn btn-danger"  (click)="deleteVehicle()">Sterge
+                <button class="btn btn-danger"  (click)="deleteVehicle()">Șterge
                 </button>              
-                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizeaza
+                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizează
                 </button>
               </div>
             </div>
@@ -61,9 +62,9 @@
     </div>
 
 
-    <h3>Masini pe combustibil</h3>
+    <h3>Mașini pe combustibil</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.combustionCars">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.combustionCars | filter:vehicleFilter">
         <div class="card border-box">
           <div class="card-body">
             <div>
@@ -92,8 +93,8 @@
               </div>
             </div>
             <div *ngIf="car.showDetails">
-              <p class="card-text">Numar masina: {{ car.carNumber }}</p>
-              <p class="card-text">Distanta: {{ car.distance }} km</p>
+              <p class="card-text">Număr mașină: {{ car.carNumber }}</p>
+              <p class="card-text">Parcurs: {{ car.distance }} km</p>
               <p class="card-text">Putere motor: {{ car.enginePower }}</p>
               <form (ngSubmit)="onSubmit()" *ngIf="getRolefromToken() === 'client'">
                 <label>
@@ -106,9 +107,9 @@
                 <button class="button-13" type="submit">Arenda</button>
               </form>
               <div class="card-text-row" *ngIf="getRolefromToken() === 'Admin'" style="padding-top: 20px;">
-                <button class="btn btn-danger"  (click)="deleteVehicle()">Sterge
+                <button class="btn btn-danger"  (click)="deleteVehicle()">Șterge
                 </button>              
-                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizeaza
+                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizează
                 </button>
               </div>
             </div>
@@ -117,9 +118,9 @@
       </div>
     </div>
 
-    <h3>Masini electrice</h3>
+    <h3>Mașini electrice</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.hyElectricCars">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.hyElectricCars | filter:vehicleFilter">
         <div class="card border-box">
           <div class="card-body">
             <div>
@@ -148,9 +149,9 @@
               </div>
             </div>
             <div *ngIf="car.showDetails">
-              <p class="card-text">Numar masina: {{ car.carNumber }}</p>
-              <p class="card-text">Distanta: {{ car.distance }} km</p>
-              <p class="card-text">Putere electrica : {{ car.enginePower }}</p>
+              <p class="card-text">Număr mașină: {{ car.carNumber }}</p>
+              <p class="card-text">Parcurs: {{ car.distance }} km</p>
+              <p class="card-text">Putere electrică : {{ car.enginePower }}</p>
               <p class="card-text">Capacitate Baterie: {{ car.batteryCapacity }}km</p>
               <form (ngSubmit)="onSubmit()" *ngIf="getRolefromToken() === 'client'">
                 <label>
@@ -163,9 +164,9 @@
                 <button class="button-13" type="submit">Arenda</button>
               </form>
               <div class="card-text-row" *ngIf="getRolefromToken() === 'Admin'" style="padding-top: 20px;">
-                <button class="btn btn-danger"  (click)="deleteVehicle()">Sterge
+                <button class="btn btn-danger"  (click)="deleteVehicle()">Șterge
                 </button>              
-                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizeaza
+                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizează
                 </button>
               </div>
             </div>
@@ -178,7 +179,7 @@
 
     <h3>Motociclete electrice</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.electricMotorcycle">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.electricMotorcycle | filter:vehicleFilter">
         <div class="card border-box">
           <div class="card-body">
             <div>
@@ -207,9 +208,9 @@
               </div>
             </div>
             <div *ngIf="car.showDetails">
-              <p class="card-text">Numar masina: {{ car.carNumber }}</p>
-              <p class="card-text">Distanta: {{ car.distance }} km</p>
-              <p class="card-text">Putere electrica : {{ car.enginePower }}</p>
+              <p class="card-text">Număr mașină: {{ car.carNumber }}</p>
+              <p class="card-text">Parcurs: {{ car.distance }} km</p>
+              <p class="card-text">Putere electrică : {{ car.enginePower }}</p>
               <p class="card-text">Capacitate Baterie: {{ car.batteryCapacity }}km</p>
               <form (ngSubmit)="onSubmit()" *ngIf="getRolefromToken() === 'client'">
                 <label>
@@ -222,9 +223,9 @@
                 <button class="button-13" type="submit">Arenda</button>
               </form>
               <div class="card-text-row" *ngIf="getRolefromToken() === 'Admin'" style="padding-top: 20px;">
-                <button class="btn btn-danger"  (click)="deleteVehicle()">Sterge
+                <button class="btn btn-danger"  (click)="deleteVehicle()">Șterge
                 </button>              
-                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizeaza
+                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizează
                 </button>
               </div>
             </div>
@@ -236,7 +237,7 @@
     
     <h3>Motociclete pe combustibil:</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.combustionMotorcycles">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.combustionMotorcycles | filter:vehicleFilter">
         <div class="card border-box">
           <div class="card-body">
             <div>
@@ -265,8 +266,8 @@
               </div>
             </div>
             <div *ngIf="car.showDetails">
-              <p class="card-text">Numar masina: {{ car.carNumber }}</p>
-              <p class="card-text">Distanta: {{ car.distance }} km</p>
+              <p class="card-text">Număr mașină: {{ car.carNumber }}</p>
+              <p class="card-text">Parcurs: {{ car.distance }} km</p>
               <p class="card-text">Putere motor: {{ car.enginePower }}</p>
               <form (ngSubmit)="onSubmit()" *ngIf="getRolefromToken() === 'client'">
                 <label>
@@ -279,9 +280,9 @@
                 <button class="button-13" type="submit">Arenda</button>
               </form>
               <div class="card-text-row" *ngIf="getRolefromToken() === 'Admin'" >
-                <button class="btn btn-danger"  (click)="deleteVehicle()">Sterge
+                <button class="btn btn-danger"  (click)="deleteVehicle()">Șterge
                 </button>              
-                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizeaza
+                <button (click)="updateVehicleStatus()" class="btn btn-info" style="height: 50px;"> Actualizează
                 </button>
               </div>
             </div>

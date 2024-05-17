@@ -6,6 +6,7 @@ import { Vehicle } from '../../Models/Vehicle';
 import { UpdateVehicleStatus } from '../../Models/UpdateVehicleStatus';
 import { ClientsService } from '../../Services/clients.service';
 import { Client } from '../../Models/Clients';
+import { LoginService } from '../../Services/login.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -16,13 +17,16 @@ export class AdminPageComponent {
 
   rentals: any[] = []; 
   inspections: any[] = [];
-  vehicle: Vehicle = new Vehicle(0, '', '', '', 0, 0, '', 0, 0, 0, 0, ''); 
+  vehicle: Vehicle = new Vehicle(0, '0', '', '', 0, 0, '', 0, 0, 0, 0, ''); 
   id: number = 0;
   typeVehicle: string = '0';
+  rentalsFilter = '';
+  inspectionsFilter = '';
 
   constructor(private InspectionService: InspectionService,
     private rentalService: RentalsService,
-    private vehicleService: VehicleService
+    private vehicleService: VehicleService,
+    private loginService : LoginService
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +52,9 @@ export class AdminPageComponent {
     })
   }
 
-
+  getRolefromToken(){
+    return this.loginService.getUserRole();
+  }
   getVehicle(): void{
     dataToUpdate.id = this.id;
     dataToUpdate.vehicleType = this.typeVehicle;
