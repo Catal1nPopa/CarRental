@@ -1,0 +1,25 @@
+<div>
+    <h3>Clients</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nume</th>
+                    <th scope="col">Data Inregistrare</th>
+                    <th scope="col">Numar telefon</th>
+                    <th scope="col">Inchirieri</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clientList">
+                    <td>{{ client.id }}</td>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.registerDateTime }}</td>
+                    <td>{{ client.phoneNumber }}</td>
+                    <td>{{ client.rentalCars }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

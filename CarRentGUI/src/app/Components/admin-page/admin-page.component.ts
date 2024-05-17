@@ -4,6 +4,8 @@ import { RentalsService } from '../../Services/rentals.service';
 import { InspectionService } from '../../Services/inspection.service';
 import { Vehicle } from '../../Models/Vehicle';
 import { UpdateVehicleStatus } from '../../Models/UpdateVehicleStatus';
+import { ClientsService } from '../../Services/clients.service';
+import { Client } from '../../Models/Clients';
 
 @Component({
   selector: 'app-admin-page',
@@ -26,9 +28,13 @@ export class AdminPageComponent {
   ngOnInit(): void {
     this.getAllRentals();
     this.getInspections();
-    // this.getVehicle();
   }
 
+  deleteRental(id:number){
+    this.rentalService.deleteRentals(id).subscribe((res : any) => {
+      console.log(res);
+        });
+  }
 
   getAllRentals(){
     this.rentalService.getAllRentals().subscribe((data: any[]) => {
@@ -41,6 +47,7 @@ export class AdminPageComponent {
       this.inspections = data;
     })
   }
+
 
   getVehicle(): void{
     dataToUpdate.id = this.id;

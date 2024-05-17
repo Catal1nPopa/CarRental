@@ -63,8 +63,6 @@ export class LoginService {
     const token = this.getToken();
     if (token) {
       const decodedToken: any = jwt.decodeToken(token);
-      // console.log(decodedToken.nameid);
-      // console.log("dasas");
       return decodedToken.nameid;
     }
     return 0;
@@ -76,20 +74,20 @@ export class LoginService {
     this.router.navigate(['login'])
   }
 
-  getNameFroToken(){
-    if(this.userData)
-      return this.userData.unique_name;
-  }
+  // getNameFroToken(){
+  //   if(this.userData)
+  //     return this.userData.unique_name;
+  // }
 
   getUserName(): string{
     const decodeToken = this.decodedToken()
     return decodeToken.unique_name;
   }
 
-  getRolefromToken(){
-    if(this.userData)
-      return this.userData.role;
-  }
+  // getRolefromToken(){
+  //   if(this.userData)
+  //     return this.userData.role;
+  // }
 
   getUserRole(): string{
     const decodeToken = this.decodedToken()

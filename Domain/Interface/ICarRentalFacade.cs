@@ -20,6 +20,13 @@ namespace CarRentail.Domain.Interface
         CombustionCar getCombustionCars(int id);
         ElectricMotorcycle getElectricMotorcycles(int id);
         CombustionMotorcycle getCombustionMotorcycles(int id);
+        List<Client> getAllClients();
+        Client getClient(string name);
+        bool UpdatePhoneNumber(int idClient, string phoneNumber);
+
+        void deleteRental(int id);
+
+        List<RentalProc> getRentalsCustomer(int id);
 
     }
 }

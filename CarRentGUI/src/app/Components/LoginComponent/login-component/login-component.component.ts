@@ -12,8 +12,6 @@ import { NgToastComponent, NgToastService } from 'ng-angular-popup';
 export class LoginComponentComponent {
 
   loginForm!: FormGroup;
-  registerForm!: FormGroup;
-  isLoginFormVisible: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router,
     private toast : NgToastService
@@ -24,39 +22,9 @@ export class LoginComponentComponent {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-    this.toggleForm();
-
-    this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
   }
 
   toggleForm(): void {
-    this.isLoginFormVisible = !this.isLoginFormVisible;
-  }
-  goToRegister() {
-    this.toggleForm();
-  }
-  register(): void {
-
-
-    const username = this.registerForm.value.username;
-    const password = this.registerForm.value.password;
-
-    this.loginService.register(username, password)
-      .subscribe(
-        response => {
-          console.log('Registration successful:', response);
-          this.showSuccessRegister();
-          // Handle successful registration response
-        },
-        error => {
-          console.error('Registration error:', error);
-          this.showErrorRegister();
-          // Handle error
-        }
-      );
   }
 
   login()
@@ -81,14 +49,8 @@ export class LoginComponentComponent {
   showError() {
     this.toast.error({detail:"ERROR",summary:'Eroare la autentificare',sticky:true});
   }
-  showErrorRegister() {
-    this.toast.error({detail:"ERROR",summary:'Eroare la inregistrare',sticky:true});
-  }
   showSuccess() {
     this.toast.success({detail:"SUCCESS",summary:'Autentificare cu succes',duration:5000});
-  }
-  showSuccessRegister() {
-    this.toast.success({detail:"SUCCESS",summary:'Inregistrare cu succes',duration:5000});
   }
   showWarn() {
     this.toast.warning({detail:"WARN",summary:'Your Warn Message',duration:5000});

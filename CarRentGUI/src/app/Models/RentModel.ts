@@ -12,3 +12,15 @@ export class RentModel{
             this.vehicleTypes = vehicleTypes;
         }
 }
+
+
+export interface Rental {
+    id: number;
+    customerId: number;
+    vehicleId: number;
+    vehicleType: string;
+    carNumber: string;
+    starTime: string;
+    endTime: string;
+    totalPrice: number;
+  }

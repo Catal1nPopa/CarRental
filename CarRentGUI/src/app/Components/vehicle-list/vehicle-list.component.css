@@ -73,6 +73,7 @@ input[type=number] {
 }
 
 .card-body img {
-  height: 150px; /* Setează înălțimea imaginilor la 200px sau orice valoare dorești */
+  height: 150px; 
+  text-align: center;
 }
 

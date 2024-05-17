@@ -5,9 +5,10 @@
       </button>
       <div class="navbar-title">TopRental</div> <!-- Adăugăm titlul aici -->
       <div class="navbar-links">
+        <button [routerLink]="['/home']" style="color: rgb(9, 133, 182)">Home</button>
         <button *ngIf="getRole() === 'Admin'" [routerLink]="['/adminPage']" style="color: rgb(9, 133, 182);">Admin Page</button>
         <!-- <button>TopRental</button> -->
-        <h5 id="userNameLabel" style="margin-top: 5px; color: rgb(9, 133, 182)"> {{userNameLabel}}</h5>
+        <button [routerLink]="['/profile']" type="button" id="userNameLabel" style="margin-top: 5px; color: rgb(9, 133, 182)"> {{userNameLabel}}</button>
         <button (click)="logout()" style="color: red;">logout</button>
       </div>
     </div>

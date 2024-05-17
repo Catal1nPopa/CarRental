@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../../Services/register.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgToastModule, NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private toast: NgToastService
   ) { }
 
   ngOnInit(): void {
@@ -33,17 +35,18 @@ export class RegisterComponent implements OnInit {
     this.registerService.register(username, password)
       .subscribe(
         response => {
-          console.log('Registration successful:', response);
-          // Handle successful registration response
+          this.showSuccessRegister();
         },
         error => {
-          console.error('Registration error:', error);
-          // Handle error
+          this.showErrorRegister();
         }
       );
   }
 
-  goToLogin(){
-    this.registerService.goToLogin();
+  showErrorRegister() {
+    this.toast.error({detail:"ERROR",summary:'Eroare la inregistrare',sticky:true});
+  }
+  showSuccessRegister() {
+    this.toast.success({detail:"SUCCESS",summary:'Inregistrare cu succes',duration:5000});
   }
 }
