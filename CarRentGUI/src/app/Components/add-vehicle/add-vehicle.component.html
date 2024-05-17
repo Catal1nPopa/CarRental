@@ -4,12 +4,12 @@
 <div *ngIf="displayCarForm">
   <form (ngSubmit)="submitForm()" #carForm="ngForm">
     <div class="form-group">
-      <label for="brand">Brand:</label>
+      <label for="brand">Marcă:</label>
       <input type="text" class="form-control" id="brand" name="brand" [(ngModel)]="car.brand" required>
     </div>
     
     <div class="form-group">
-      <label for="carNumber">Car Number:</label>
+      <label for="carNumber">Număr mașină:</label>
       <input type="text" class="form-control" id="carNumber" name="carNumber" [(ngModel)]="car.carNumber" required>
     </div>
     
@@ -19,12 +19,12 @@
     </div>
     
     <div class="form-group">
-      <label for="year">Year:</label>
+      <label for="year">Anul producției:</label>
       <input type="number" class="form-control" id="year" name="year" [(ngModel)]="car.year" required>
     </div>
     
     <div class="form-group">
-      <label for="distance">Distance:</label>
+      <label for="distance">Parcurs:</label>
       <input type="number" class="form-control" id="distance" name="distance" [(ngModel)]="car.distance" required>
     </div>
     
@@ -34,36 +34,36 @@
     </div> -->
 
     <div class="form-group">
-      <label for="photo">Photo:</label>
+      <label for="photo">Poză:</label>
       <input type="file" id="photo" name="photo" class="form-control-file"  [(ngModel)]="car.photo">
     </div>
     
     <div class="form-group">
-      <label for="price">Price:</label>
+      <label for="price">Preț:</label>
       <input type="number" class="form-control" id="price" name="price" [(ngModel)]="car.price" required>
     </div>
     
     <div class="form-group">
-      <label for="enginePower">Engine Power:</label>
+      <label for="enginePower">Putere motor:</label>
       <input type="number" class="form-control" id="enginePower" name="enginePower" [(ngModel)]="car.enginePower" required>
     </div>
     
     <div class="form-group">
-      <label for="electricPower">Electric Power:</label>
+      <label for="electricPower">Putere electrică:</label>
       <input type="number" class="form-control" id="electricPower" name="electricPower" [(ngModel)]="car.electricPower" required>
     </div>
     
     <div class="form-group">
-      <label for="batteryCapacity">Battery Capacity:</label>
+      <label for="batteryCapacity">Capacitate baterie:</label>
       <input type="number" class="form-control" id="batteryCapacity" name="batteryCapacity" [(ngModel)]="car.batteryCapacity" required>
     </div>
     
     <div class="form-group">
-      <label for="vehicleType">Vehicle Type:</label>
+      <label for="vehicleType">Tip vehicol:</label>
       <input type="text" class="form-control" id="vehicleType" name="vehicleType" [(ngModel)]="car.vehicleType" required>
     </div>
   
-    <button type="submit" class="button-13">Adauga</button>
+    <button type="submit" class="button-13">Adaugă</button>
   </form>
 </div>
 </div>

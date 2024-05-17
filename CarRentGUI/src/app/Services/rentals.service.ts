@@ -24,7 +24,6 @@ export class RentalsService {
   }
 
   deleteRentalById(id: number): Observable<any> {
-    console.log(this.http.post(this.deleteRental, id));
     return this.http.post(this.deleteRental, id);
   }  
   deleteRentals(id: number): Observable<any> {

@@ -12,7 +12,7 @@ export const tokenInterceptor: HttpInterceptorFn = (request, next) => {
 
     console.log(request.url);
 
-    if(token && !request.url.includes('Auth/Login'))
+    if(token && !request.url.includes('login'))
         {
             request = request.clone({
                 headers: request.headers.set(

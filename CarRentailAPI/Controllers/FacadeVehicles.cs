@@ -33,7 +33,7 @@ namespace CarRentailAPI.Controllers
         }
 
         [HttpGet("GetClient")]
-        public Client GetClient([FromBody] string name)
+        public Client GetClient(string name)
         {
             return _carRentalFacade.getClient(name);
         }

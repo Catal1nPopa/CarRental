@@ -1,98 +1,115 @@
-<app-menu></app-menu>
-<div class="container">
-    <div>
-        <div>
-            <h3>Rentals</h3>
-            <div class="table-responsive" style="margin-top: 50px;"> 
-                <table class="table table-striped table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Id client</th>
-                            <th scope="col">Id vehicul</th>
-                            <th scope="col">Tip vehicul</th>
-                            <th scope="col">Număr mașină</th>
-                            <th scope="col">Timp început</th>
-                            <th scope="col">Timp sfârșit</th>
-                            <th scope="col">Preț total</th>
-                            <th scope="col">Anuleaza Inchiriere</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let rental of rentals">
-                            <td>{{ rental.id }}</td>
-                            <td>{{ rental.customerId }}</td>
-                            <td>{{ rental.vehicleId }}</td>
-                            <td>{{ rental.vehicleType }}</td>
-                            <td>{{ rental.carNumber }}</td>
-                            <td>{{ rental.starTime | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ rental.endTime | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ rental.totalPrice }}</td>
-                            <td><button type="button" (click)="deleteRental(rental.id)">X</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+<body>
+    <app-menu></app-menu>
+    <div class="container">
+
+        <div class="container" style="position: relative;">
+            <app-add-vehicle *ngIf="getRolefromToken() === 'Admin'"
+                style="position: absolute; top: 100px; left: -250px;"></app-add-vehicle>
+        </div>
+        <div style="padding-top: 5%;">
+            <div>
+                <h3>Lista de arende</h3>
+                <div class="table-responsive">
+                    <!-- Filtru pentru Rentals -->
+                    <input type="text" placeholder="Căutare" [(ngModel)]="rentalsFilter" class="form-control mb-2">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Id client</th>
+                                <th scope="col">Id vehicul</th>
+                                <th scope="col">Tip vehicul</th>
+                                <th scope="col">Număr mașină</th>
+                                <th scope="col">Timp început</th>
+                                <th scope="col">Timp sfârșit</th>
+                                <th scope="col">Preț total</th>
+                                <th scope="col">Anuleaza Inchiriere</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rental of rentals | filter:rentalsFilter">
+                                <td>{{ rental.id }}</td>
+                                <td>{{ rental.customerId }}</td>
+                                <td>{{ rental.vehicleId }}</td>
+                                <td>{{ rental.vehicleType }}</td>
+                                <td>{{ rental.carNumber }}</td>
+                                <td>{{ rental.starTime | date:'yyyy-MM-dd' }}</td>
+                                <td>{{ rental.endTime | date:'yyyy-MM-dd' }}</td>
+                                <td>{{ rental.totalPrice }}</td>
+                                <td><button type="button" class="btn btn-danger"
+                                        (click)="deleteRental(rental.id)">X</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div style="padding-top: 5%;">
+                <h3>Inspecții vehicol</h3>
+                <div class="table-responsive">
+                    <input type="text" placeholder="Căutare" [(ngModel)]="inspectionsFilter" class="form-control mb-2">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Descriere</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Număr mașină</th>
+                                <th scope="col">Inspectie avansata</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let inspection of inspections | filter:inspectionsFilter">
+                                <td>{{ inspection.id }}</td>
+                                <td>{{ inspection.description }}</td>
+                                <td>{{ inspection.date | date:'yyyy-MM-dd' }}</td>
+                                <td>{{ inspection.carNumber }}</td>
+                                <td>{{ inspection.advanced }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div style="padding-top: 5%;">
+                <app-clients></app-clients>
             </div>
         </div>
 
-        <div>
-            <h3>Inspections</h3>
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Descriere</th>
-                            <th scope="col">Data</th>
-                            <th scope="col">Număr mașină</th>
-                            <th scope="col">Inspectie avansata</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let inspection of inspections">
-                            <td>{{ inspection.id }}</td>
-                            <td>{{ inspection.description }}</td>
-                            <td>{{ inspection.date | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ inspection.carNumber }}</td>
-                            <td>{{ inspection.advanced }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+
+        <div style="padding-top: 5%;">
+            <h3>Caută vehicol</h3>
+            <form (ngSubmit)="getVehicle()" #carForm="ngForm" class="form-inline">
+                <div class="form-group">
+                    <label for="id">Id:</label>
+                    <input type="number" class="form-control" id="id" name="id" [(ngModel)]="id" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="typeVehicle">Type:</label>
+                    <input type="text" class="form-control" id="typeVehicle" name="typeVehicle"
+                        [(ngModel)]="typeVehicle" required>
+                </div>
+            </form>
+
+
+            <button class="btn btn-success" (click)="getVehicle()" style="margin-top: 1%;">Caută</button>
+            <div *ngIf="vehicle.vehicleType === '0'">
+                <img [src]="convertToBase64(vehicle.photo)" alt="{{ vehicle.brand }} Image"
+                    class="img-fluid mb-2 img_x">
+                <ul>
+                    <li><strong>Brand:</strong> {{ vehicle.brand }}</li>
+                    <li><strong>Număr mașină:</strong> {{ vehicle.carNumber }}</li>
+                    <li><strong>Model:</strong> {{ vehicle.model }}</li>
+                    <li><strong>Anul producerii:</strong> {{ vehicle.year }}</li>
+                    <li><strong>Parcurs:</strong> {{ vehicle.distance }}</li>
+                    <li><strong>Preț:</strong> {{ vehicle.price }}</li>
+                    <li><strong>Putere motor:</strong> {{ vehicle.enginePower }}</li>
+                    <li><strong>Putere electrică:</strong> {{ vehicle.electricPower }}</li>
+                    <li><strong>Capacitate baterie:</strong> {{ vehicle.batteryCapacity }}</li>
+                </ul>
             </div>
         </div>
-
-        <app-clients></app-clients>
     </div>
-
-
-
-
-    <form (ngSubmit)="getVehicle()" #carForm="ngForm">
-        <div class="form-group">
-            <label for="id">Id:</label>
-            <input type="number" class="form-control" id="id" name="id" [(ngModel)]="id" required>
-        </div>
-
-        <div class="form-group">
-            <label for="typeVehicle">Type:</label>
-            <input type="text" class="form-control" id="typeVehicle" name="typeVehicle" [(ngModel)]="typeVehicle"
-                required>
-        </div>
-    </form>
-    <input>
-    <button (click)="getVehicle()">cauta</button>
-    <div *ngIf="vehicle">
-        <img [src]="convertToBase64(vehicle.photo)" alt="{{ vehicle.brand }} Image" class="img-fluid mb-2 img_x">
-        <ul>
-            <li><strong>Brand:</strong> {{ vehicle.brand }}</li>
-            <li><strong>Car Number:</strong> {{ vehicle.carNumber }}</li>
-            <li><strong>Model:</strong> {{ vehicle.model }}</li>
-            <li><strong>Year:</strong> {{ vehicle.year }}</li>
-            <li><strong>Distance:</strong> {{ vehicle.distance }}</li>
-            <li><strong>Price:</strong> {{ vehicle.price }}</li>
-            <li><strong>Engine Power:</strong> {{ vehicle.enginePower }}</li>
-            <li><strong>Electric Power:</strong> {{ vehicle.electricPower }}</li>
-            <li><strong>Battery Capacity:</strong> {{ vehicle.batteryCapacity }}</li>
-        </ul>
-    </div>
-</div>
+</body>

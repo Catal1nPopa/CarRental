@@ -37,6 +37,7 @@ export class LoginComponentComponent {
               this.loginService.storeToken(res.token)
               this.loginForm.reset()
               this.showSuccess()
+              console.log(this.loginService.decodedToken())
               this.router.navigate(['home']);
             },
             error: (error) => {

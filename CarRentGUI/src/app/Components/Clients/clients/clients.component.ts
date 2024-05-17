@@ -13,7 +13,8 @@ export class ClientsComponent {
 
   clientList!: any[];
   client: Client = new Client(0,"",new Date(),"",0);
-
+  clientsFiler = '';
+  
   constructor(private clientService: ClientsService
   ) { }
   ngOnInit(): void {

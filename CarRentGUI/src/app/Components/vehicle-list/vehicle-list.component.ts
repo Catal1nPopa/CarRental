@@ -16,6 +16,9 @@ export class VehicleListComponent implements OnInit {
   rentData: RentModel = new RentModel(0,0,0,"0");
   userId: number = 0;
 
+  vehicleFilter = '';
+
+
   constructor(private vehicleService: VehicleService,
     private rentService: RentalsService,
     private authService: LoginService,

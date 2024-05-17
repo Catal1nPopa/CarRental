@@ -18,6 +18,7 @@ import { MenuComponent } from './Components/menu/menu.component';
 import { AdminPageComponent } from './Components/admin-page/admin-page.component';
 import { ClientsComponent } from './Components/Clients/clients/clients.component';
 import { ProfileComponent } from './Components/profile/profile.component';
+import { FilterPipe } from './PipeFilter/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { ProfileComponent } from './Components/profile/profile.component';
     MenuComponent,
     AdminPageComponent,
     ClientsComponent,
-    ProfileComponent
+    ProfileComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

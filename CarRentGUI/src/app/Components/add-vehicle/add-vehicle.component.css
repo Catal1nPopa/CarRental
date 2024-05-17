@@ -2,3 +2,12 @@ form{
     width: 250px;
     color: white;
 }
+
+
+input{
+    border-color: black;
+}
+
+label{
+    color: black;
+}
