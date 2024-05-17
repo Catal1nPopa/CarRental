@@ -16,6 +16,8 @@ import { RegisterComponent } from './Components/LoginComponent/register/register
 import { AddVehicleComponent } from './Components/add-vehicle/add-vehicle.component';
 import { MenuComponent } from './Components/menu/menu.component';
 import { AdminPageComponent } from './Components/admin-page/admin-page.component';
+import { ClientsComponent } from './Components/Clients/clients/clients.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,9 @@ import { AdminPageComponent } from './Components/admin-page/admin-page.component
     RegisterComponent,
     AddVehicleComponent,
     MenuComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    ClientsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

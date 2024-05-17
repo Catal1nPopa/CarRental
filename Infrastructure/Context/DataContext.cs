@@ -18,7 +18,7 @@ namespace CarRentail.Infrastructure.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=CATALIN; Database=CarRentail; Integrated Security=True; TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=CATALIN; Database=CarRentail; Integrated Security=True; TrustServerCertificate=True;");
         }
 
 

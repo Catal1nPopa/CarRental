@@ -26,6 +26,60 @@ namespace CarRentailAPI.Controllers
             return _carRentalFacade.getAllVehicles();
         }
 
+        [HttpGet("GetAllClients")]
+        public List<Client> GetVehicles()
+        {
+            return _carRentalFacade.getAllClients();
+        }
+
+        [HttpGet("GetClient")]
+        public Client GetClient([FromBody] string name)
+        {
+            return _carRentalFacade.getClient(name);
+        }
+
+        [HttpPatch("UpdatePhone")]
+        public IActionResult UpdatePhoneNumber([FromBody] UpdatePhone dataProfile)
+        {
+            try
+            {
+                 var res = _carRentalFacade.UpdatePhoneNumber(dataProfile.Id, dataProfile.PhoneNumber);
+                 if(res)
+                    return Ok();
+                 return BadRequest(res);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetRentalsCustomer")]
+        public List<RentalProc> GetRentalProc(int id)
+                {
+            try
+            {
+                return _carRentalFacade.getRentalsCustomer(id);
+            }
+            catch (Exception ez)
+            {
+                return null;
+            }
+        }
+
+        [HttpDelete("DeleteRental")]
+        public void DeleteRent(int id)
+        {
+            try
+            {
+                _carRentalFacade.deleteRental(id);
+            }
+            catch (Exception ex)
+            {
+                BadRequest(ex.Message);
+            }
+        }
+
         [HttpDelete("DeleteVehicle")]
         public void DeleteVehicle(int id, string type)
         {
@@ -35,16 +89,21 @@ namespace CarRentailAPI.Controllers
                 case ("0"):
                     vehicleTypes = 0;
                     break;
+                case ("1"):
+                    vehicleTypes = (VehicleTypes)1;
+                    break;
+                case ("2"):
+                    vehicleTypes = (VehicleTypes)2;
+                    break;
+                case ("3"):
+                    vehicleTypes = (VehicleTypes)3;
+                    break;
+                case ("4"):
+                    vehicleTypes = (VehicleTypes)4;
+                    break;
             }
             _carRentalFacade.RemoveVehicle(id, vehicleTypes);
         }
-
-        //[HttpPut("Fcade Update")]
-        //public bool UpdateDateVehicle(int id, Vehicle data, VehicleType.VehicleTypes vehicleTypes)
-        //{
-        //    var res = _carRentalFacade.UpdateVehicles(id, data, vehicleTypes);
-        //    return res;
-        //}
 
         [HttpPost("GetById")]
         public object GetVehicleById([FromBody] UpdateVehicleStatus data)

@@ -38,9 +38,12 @@ namespace CarRentail.Domain.Interface
         void AddCarInspection (CarInspection carInspection);
         List<CarInspection> GetAllInspections();
 
+        //rentals
          List<RentalProc> GetAllRentals();
         void AddRentalRegistration(RentalProc  rentalRegistration);
         void UpdateRentakRegistration(RentalProc  rentalRegistration);
+        void DeleteRentalRegistration(int id);
+        List<RentalProc> GetRentalsByCustomer(int id);
 
         //Users
 
@@ -52,7 +55,9 @@ namespace CarRentail.Domain.Interface
         //Clients
         void AddClient(Client client);
         void UpdateClientRentals(int client);
-        Client GetClient(Client client);
+        Client GetClient(string name);
+        List<Client> GetClients();
+        void UpdateClientPhone(int client, string phoneNumber);
 
     }
 }

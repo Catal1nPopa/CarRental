@@ -311,18 +311,43 @@ namespace CarRentail.Infrastructure.Repositories
            return  _context.RentalRegistration.ToList();
         }
 
+        //rental 
         public void AddRentalRegistration(RentalProc rentalProc)
         {
             _context.Add(rentalProc);
             _context.SaveChanges();
         }
 
+        public List<RentalProc> GetRentalsByCustomer(int id)
+        {
+            var rentals = GetAllRentals();
+            List<RentalProc> rental = new List<RentalProc>();
+
+            foreach (var rent in rentals)
+            {
+                if(rent.CustomerId.Equals(id))
+                    rental.Add(rent);
+            }
+            return rental;
+        }
         public void UpdateRentakRegistration(RentalProc rentalProc)
         {
             _context.Update(rentalProc);
             _context.SaveChanges();
         }
 
+        public RentalProc GetRentalProcById(int id)
+        {
+           return _context.RentalRegistration.FirstOrDefault(v => v.Id == id);
+        }
+        public void DeleteRentalRegistration(int id)
+        {
+            var rentalById = GetRentalProcById(id);
+            _context.Remove(rentalById);
+            _context.SaveChanges();
+        }
+
+        
         public void AddUser(User dataUser)
         {
             _context.Users.Add(dataUser);
@@ -364,9 +389,24 @@ namespace CarRentail.Infrastructure.Repositories
             }
         }
 
-        public Client GetClient(Client client)
+        public void UpdateClientPhone(int client, string phoneNumber)
         {
-            return _context.Clients.FirstOrDefault(v => v.Name == client.Name);
+            var clientToUpdate = _context.Clients.FirstOrDefault(u => u.Id == client);
+            if (clientToUpdate != null)
+            {
+                clientToUpdate.PhoneNumber = phoneNumber;
+                _context.SaveChanges();
+            }
+        }
+
+        public Client? GetClient(string Name)
+        {
+            return _context.Clients.FirstOrDefault(v => v.Name == Name);
+        }
+
+        public List<Client> GetClients()
+        {
+            return _context.Clients.ToList();
         }
     }
 }

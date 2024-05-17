@@ -43,7 +43,7 @@ if (this.car.photo) {
      }
   
   getRolefromToken(){
-    return this.loginService.getRolefromToken();
+    return this.loginService.getUserRole();
   }
 
 
