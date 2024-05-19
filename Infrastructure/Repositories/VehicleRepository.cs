@@ -371,6 +371,17 @@ namespace CarRentail.Infrastructure.Repositories
             }
         }
 
+        public void UpdateRoleUser(User dataUser)
+        {
+            var userToUpdate = _context.Users.FirstOrDefault(u => u.Id == dataUser.Id);
+
+            if (userToUpdate != null)
+            {
+                userToUpdate.role = dataUser.role;
+                _context.SaveChanges();
+            }
+        }
+
         //clients
 
         public void AddClient(Client client)

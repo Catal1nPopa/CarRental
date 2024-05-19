@@ -58,7 +58,7 @@
                             <td>{{ rental.carNumber }}</td>
                             <td>{{ rental.starTime | date:'yyyy-MM-dd' }}</td>
                             <td>{{ rental.endTime | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ rental.totalPrice }}</td>
+                            <td>{{ rental.totalPrice | currency: 'EUR' }}</td>
                             <td><button type="button" class="btn btn-danger"
                                     (click)="deleteRental(rental.id)">X</button></td>
                         </tr>

@@ -2,6 +2,7 @@
 using CarRentail.Application.Requests;
 using CarRentail.Application.Services;
 using CarRentail.Domain.Entities.Auth;
+using CarRentailAPI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -70,6 +71,26 @@ namespace CarRentailAPI.Controllers
             try
             {
                 var update = await userServices.updatePassword(user);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                SendEmail.SendEmailException(ex, mediator);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("SchimbareRol")]
+        public async Task<IActionResult> UpdateRole([FromBody] UpdateRole user)
+        {
+            User userData = new User();
+            userData.username = user.userName;
+            userData.role = user.RoleName;
+            if (userData.username.IsNullOrEmpty())
+                return BadRequest();
+            try
+            {
+                var update = await userServices.updateRole(userData);
                 return Ok();
             }
             catch (Exception ex)

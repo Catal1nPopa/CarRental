@@ -26,21 +26,41 @@ export class AdminPageComponent {
   inspectionForm: FormGroup;
   rentalsFilter = '';
   inspectionsFilter = '';
+  
+  vehicles: string[] = ['Mașină Hybrid', 'Mașină Combustibil', 'Mașină Electrică', 'Motocicletă Electrică', 'Motocicletă Combustibil'];
+  selectedVehicleIndex: number = 0;
 
+  user = { userName: '', RoleName: '' };
+  
   constructor(private InspectionService: InspectionService,
     private rentalService: RentalsService,
     private vehicleService: VehicleService,
     private loginService : LoginService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private clientService: ClientsService
   ) {this.inspectionForm = this.fb.group({
     carNumber: ['', Validators.required],
     date: ['', Validators.required],
     advanceInspection: [false]
   }); }
-
+  
   ngOnInit(): void {
     this.getAllRentals();
     this.getInspections();
+  }
+ 
+  chengeRole() {
+    if (this.user.userName && this.user.RoleName) {
+      this.clientService.changeRole(this.user).subscribe(response => {
+        console.log('Response from backend:', response);
+      });
+    }
+  }
+ 
+  onVehicleChange(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.typeVehicle = String(target.value);
+    console.log('Selected vehicle index:', this.selectedVehicleIndex);
   }
 
   onSubmit(): void {
