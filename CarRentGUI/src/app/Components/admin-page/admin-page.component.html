@@ -4,7 +4,7 @@
 
         <div class="container" style="position: relative;">
             <app-add-vehicle *ngIf="getRolefromToken() === 'Admin'"
-                style="position: absolute; top: 100px; left: -250px;"></app-add-vehicle>
+                style="position: absolute; top: 100px; left: -270px;"></app-add-vehicle>
         </div>
         <div style="padding-top: 5%;">
             <div>
@@ -47,23 +47,23 @@
             <div class="container mt-5">
                 <h3>Creare Inspecție</h3>
                 <div class="table-responsive">
-                    <form [formGroup]="inspectionForm" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="inspectionForm" (ngSubmit)="onSubmit()" class="form-inline">
                         <div class="mb-3">
-                            <label for="carNumber" class="form-label">Car Number:</label>
+                            <label for="carNumber" class="form-label">Număr mașină:</label>
                             <input type="text" id="carNumber" formControlName="carNumber" class="form-control">
                         </div>
                         
                         <div class="mb-3">
-                            <label for="date" class="form-label">Date:</label>
+                            <label for="date" class="form-label">Data:</label>
                             <input type="date" id="date" type="date" formControlName="date" class="form-control">
                         </div>
                       
                         <div class="form-check mb-3">
                             <input id="advanceInspection" type="checkbox" formControlName="advanceInspection" class="form-check-input">
-                            <label for="advanceInspection" class="form-check-label">Advance Inspection:</label>
+                            <label for="advanceInspection" class="form-check-label">Inspecție avansată:</label>
                         </div>
                       
-                        <button type="submit" class="btn btn-outline-success" [disabled]="inspectionForm.invalid">Submit</button>
+                        <button type="submit" class="btn btn-outline-success" [disabled]="inspectionForm.invalid">Crează</button>
                     </form>
                 </div>
             </div>
@@ -112,31 +112,54 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="typeVehicle">Type:</label>
-                    <input type="text" class="form-control" id="typeVehicle" name="typeVehicle"
-                        [(ngModel)]="typeVehicle" required>
+                    <label for="typeVehicle">Tip:</label>
+                    <select class="form-control" id="typeVehicle" name="typeVehicle" [(ngModel)]="selectedVehicleIndex" (change)="onVehicleChange($event)" required>
+                        <option *ngFor="let vehicle of vehicles; let i = index" [value]="i">{{vehicle}}</option>
+                    </select>
                 </div>
+                
+                
                 <div>
                     <button class="btn btn-outline-success" (click)="getVehicle()" style="margin-top: 1%;">Caută</button>
                 </div>
             </form>
-
-
-            <div *ngIf="vehicle.vehicleType === '0'">
-                <img [src]="convertToBase64(vehicle.photo)" alt="{{ vehicle.brand }} Image"
-                    class="img-fluid mb-2 img_x">
-                <ul>
-                    <li><strong>Brand:</strong> {{ vehicle.brand }}</li>
-                    <li><strong>Număr mașină:</strong> {{ vehicle.carNumber }}</li>
-                    <li><strong>Model:</strong> {{ vehicle.model }}</li>
-                    <li><strong>Anul producerii:</strong> {{ vehicle.year }}</li>
-                    <li><strong>Parcurs:</strong> {{ vehicle.distance }}</li>
-                    <li><strong>Preț:</strong> {{ vehicle.price }}</li>
-                    <li><strong>Putere motor:</strong> {{ vehicle.enginePower }}</li>
-                    <li><strong>Putere electrică:</strong> {{ vehicle.electricPower }}</li>
-                    <li><strong>Capacitate baterie:</strong> {{ vehicle.batteryCapacity }}</li>
-                </ul>
-            </div>
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img [src]="convertToBase64(vehicle.photo)" alt="{{ vehicle.brand }} Image" class="img-fluid mb-5 rounded img_x" style="width: 550px;">
+                    </div>
+                    <div class="col-md-8">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Brand:</strong> {{ vehicle.brand }}</li>
+                            <li class="list-group-item"><strong>Număr mașină:</strong> {{ vehicle.carNumber }}</li>
+                            <li class="list-group-item"><strong>Model:</strong> {{ vehicle.model }}</li>
+                            <li class="list-group-item"><strong>Anul producerii:</strong> {{ vehicle.year }}</li>
+                            <li class="list-group-item"><strong>Parcurs:</strong> {{ vehicle.distance }}</li>
+                            <li class="list-group-item"><strong>Preț:</strong> {{ vehicle.price }}</li>
+                            <li class="list-group-item"><strong>Putere motor:</strong> {{ vehicle.enginePower }}</li>
+                            <li class="list-group-item"><strong>Putere electrică:</strong> {{ vehicle.electricPower }}</li>
+                            <li class="list-group-item"><strong>Capacitate baterie:</strong> {{ vehicle.batteryCapacity }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>            
         </div>
+
+        <h3>Schimbă rol:</h3>
+        <form (click)="chengeRole()" class="form-inline" style="margin-bottom: 10px;">
+            <div class="form-group">
+              <label for="name">Nume Client:</label>
+              <input type="text" id="name" class="form-control" [(ngModel)]="user.userName" name="name" required>
+            </div>
+            <div class="form-group" style="width: 130px;">
+              <label for="role">Rol:</label>
+              <select id="role" class="form-control" [(ngModel)]="user.RoleName" name="role" required>
+                <option value="Admin">Admin</option>
+                <option value="client">Client</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-outline-success" style="margin-top: 5px;">Schimbă Rol</button>
+          </form>
+          
     </div>
 </body>

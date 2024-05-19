@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vehicle } from '../../Models/Vehicle';
 import { VehicleService } from '../../Services/vehicle.service';
 import { LoginService } from '../../Services/login.service';
+import { NgToastService } from 'ng-angular-popup';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class AddVehicleComponent implements OnInit {
   displayCarForm: boolean = false;
   
   constructor(private vehicleService: VehicleService,
-   private loginService: LoginService
+   private loginService: LoginService,private toast : NgToastService
   ) { }
 
   ngOnInit(): void {
@@ -24,8 +25,10 @@ export class AddVehicleComponent implements OnInit {
     this.vehicleService.createCar(this.car).subscribe(response => {
       // Reacționează la răspunsul de la backend, poți să adaugi notificări sau să faci alte acțiuni
       console.log('Car created successfully:', response);
+      this.toast.success({detail:"SUCCESS",summary:'Adăugare cu succes',duration:5000});
     }, error => {
       console.error('Error creating car:', error);
+      this.toast.error({detail:"ERROR",summary:'Eroare la adăugare',sticky:true});
     });
   }
 

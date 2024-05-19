@@ -12,7 +12,9 @@
           <div class="card-body" >
             <div >
               <p class="card-text id_class">ID: {{ car.id }}</p>
-              <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
+              <div class="d-flex justify-content-center">
+                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2 rounded">
+            </div>            
               <div class="card-text-row">
                 <p class="card-text-left">{{ car.brand }}</p>
                 <p class="card-text-right"> {{ car.model }}</p>
@@ -72,7 +74,9 @@
           <div class="card-body">
             <div>
               <p class="card-text id_class">ID: {{ car.id }}</p>
-              <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
+              <div class="d-flex justify-content-center">
+                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2 rounded">
+            </div>            
               <div class="card-text-row">
                 <p class="card-text-left">{{ car.brand }}</p>
                 <p class="card-text-right"> {{ car.model }}</p>
@@ -128,8 +132,10 @@
           <div class="card-body">
             <div>
               <p class="card-text id_class">ID: {{ car.id }}</p>
-              <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
-              <div class="card-text-row">
+              <div class="d-flex justify-content-center">
+                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2 rounded">
+            </div>
+             <div class="card-text-row">
                 <p class="card-text-left">{{ car.brand }}</p>
                 <p class="card-text-right"> {{ car.model }}</p>
               </div>
@@ -187,8 +193,10 @@
           <div class="card-body">
             <div>
               <p class="card-text id_class">ID: {{ car.id }}</p>
-              <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
-              <div class="card-text-row">
+              <div class="d-flex justify-content-center">
+                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2 rounded">
+            </div>
+            <div class="card-text-row">
                 <p class="card-text-left">{{ car.brand }}</p>
                 <p class="card-text-right"> {{ car.model }}</p>
               </div>
@@ -245,8 +253,10 @@
           <div class="card-body">
             <div>
               <p class="card-text id_class">ID: {{ car.id }}</p>
-              <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2">
-              <div class="card-text-row">
+              <div class="d-flex justify-content-center">
+                <img [src]="convertToBase64(car.photo)" alt="{{ car.brand }} Image" class="img-fluid mb-2 rounded">
+            </div>
+            <div class="card-text-row">
                 <p class="card-text-left">{{ car.brand }}</p>
                 <p class="card-text-right"> {{ car.model }}</p>
               </div>

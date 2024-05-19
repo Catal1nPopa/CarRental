@@ -50,6 +50,8 @@ namespace CarRentail.Domain.Interface
         void AddUser(User user);
         User GetUser(User user);
 
+        void UpdateRoleUser(User user);
+
         void UpdateUser(User user);
 
         //Clients
