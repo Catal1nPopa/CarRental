@@ -32,7 +32,6 @@ export class VehicleService {
     return this.http.post<any>(this.addVehicleUrl, carData);
   }
 
-  private updateStatus = environment.apiUrl + "Mediatr/UpdateStatus";
 
   updateVehicleStatus(UpdateVehicleStatus: UpdateVehicleStatus): Observable<any>{
     // Trimiteți datele în corpul cererii HTTP

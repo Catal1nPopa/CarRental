@@ -1,10 +1,13 @@
-<input type="text" placeholder="Căutare vehicol" [(ngModel)]="vehicleFilter" class="form-control mb-2">
-
+<input type="text" placeholder="Căutare vehicul" [(ngModel)]="vehicleFilter" class="form-control mb-2">
+<label style="display: flex; align-items: center;">
+  <input type="checkbox" [(ngModel)]="onlyAvailable">
+  <p style="color: white; margin: 0 0 0 8px;">Arată doar mașinile disponibile</p>  
+</label>
 <div class="row">
   <div class="col-12" *ngFor="let vehicle of vehicleList">
     <h3>Mașini hybrid</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.hybridCars | filter:vehicleFilter">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.hybridCars | filter:vehicleFilter  | filterStatePipe:onlyAvailable">
         <div class="card border-box">
           <div class="card-body" >
             <div >
@@ -64,7 +67,7 @@
 
     <h3>Mașini pe combustibil</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.combustionCars | filter:vehicleFilter">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.combustionCars | filter:vehicleFilter | filterStatePipe:onlyAvailable">
         <div class="card border-box">
           <div class="card-body">
             <div>
@@ -120,7 +123,7 @@
 
     <h3>Mașini electrice</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.hyElectricCars | filter:vehicleFilter">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.hyElectricCars | filter:vehicleFilter | filterStatePipe:onlyAvailable">
         <div class="card border-box">
           <div class="card-body">
             <div>
@@ -179,7 +182,7 @@
 
     <h3>Motociclete electrice</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.electricMotorcycle | filter:vehicleFilter">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.electricMotorcycle | filter:vehicleFilter | filterStatePipe:onlyAvailable">
         <div class="card border-box">
           <div class="card-body">
             <div>
@@ -237,7 +240,7 @@
     
     <h3>Motociclete pe combustibil:</h3>
     <div class="row">
-      <div class="col-3 mb-3" *ngFor="let car of vehicle.combustionMotorcycles | filter:vehicleFilter">
+      <div class="col-3 mb-3" *ngFor="let car of vehicle.combustionMotorcycles | filter:vehicleFilter | filterStatePipe:onlyAvailable">
         <div class="card border-box">
           <div class="card-body">
             <div>

@@ -7,6 +7,8 @@ import { UpdateVehicleStatus } from '../../Models/UpdateVehicleStatus';
 import { ClientsService } from '../../Services/clients.service';
 import { Client } from '../../Models/Clients';
 import { LoginService } from '../../Services/login.service';
+import { Inspection } from '../../Models/Inspection';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-page',
@@ -20,18 +22,39 @@ export class AdminPageComponent {
   vehicle: Vehicle = new Vehicle(0, '0', '', '', 0, 0, '', 0, 0, 0, 0, ''); 
   id: number = 0;
   typeVehicle: string = '0';
+  createInspection: Inspection = new Inspection("", new Date(),false);
+  inspectionForm: FormGroup;
   rentalsFilter = '';
   inspectionsFilter = '';
 
   constructor(private InspectionService: InspectionService,
     private rentalService: RentalsService,
     private vehicleService: VehicleService,
-    private loginService : LoginService
-  ) { }
+    private loginService : LoginService,
+    private fb: FormBuilder
+  ) {this.inspectionForm = this.fb.group({
+    carNumber: ['', Validators.required],
+    date: ['', Validators.required],
+    advanceInspection: [false]
+  }); }
 
   ngOnInit(): void {
     this.getAllRentals();
     this.getInspections();
+  }
+
+  onSubmit(): void {
+    if (this.inspectionForm.valid) {
+      const newInspection = new Inspection(
+        this.inspectionForm.value.carNumber,
+        new Date(this.inspectionForm.value.date),
+        this.inspectionForm.value.advanceInspection
+      );
+      this.InspectionService.createInspect(newInspection).subscribe(
+        res => console.log(res),
+        err => console.error(err)
+      );
+    }
   }
 
   deleteRental(id:number){
@@ -51,6 +74,7 @@ export class AdminPageComponent {
       this.inspections = data;
     })
   }
+
 
   getRolefromToken(){
     return this.loginService.getUserRole();

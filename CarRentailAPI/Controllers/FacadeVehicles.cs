@@ -1,4 +1,5 @@
 ﻿using CarRentail.Application.DBRequests;
+using CarRentail.Application.VehicleBuilder;
 using CarRentail.Domain.Entities;
 using CarRentail.Domain.Enums;
 using CarRentail.Domain.Interface;
@@ -130,99 +131,45 @@ namespace CarRentailAPI.Controllers
         public void AddObject(AddNewVehicle data)
         {
             data.State = true;
-            IVehicle newData;
+            IVehicleBuilder builder;
 
             switch (data.VehicleType)
             {
                 case "1":
-                    newData = new CombustionCar
-                    {
-                        Id = data.Id,
-                        Brand = data.Brand,
-                        CarNumber = data.CarNumber,
-                        Model = data.Model,
-                        Year = data.Year,
-                        Distance = data.Distance,
-                        Photo = data.Photo,
-                        Price = data.Price,
-                        EnginePower = data.EnginePower,
-                        State = data.State,
-                        VehicleType = "1"
-                    };
+                    builder = new CombustionCarBuilder();
                     break;
                 case "2":
-                    newData = new ElectricCar
-                    {
-                        Id = data.Id,
-                        Brand = data.Brand,
-                        CarNumber = data.CarNumber,
-                        Model = data.Model,
-                        Year = data.Year,
-                        Distance = data.Distance,
-                        Photo = data.Photo,
-                        Price = data.Price,
-                        EnginePower = data.EnginePower,
-                        BatteryCapacity = data.BatteryCapacity,
-                        State = data.State,
-                        VehicleType = "2"
-                    };
+                    builder = new ElectricCarBuilder().SetElectricCapacity(data.BatteryCapacity); ;
                     break;
                 case "0":
-                    string nul;
-                    newData = new HybridCar
-                    {
-                        Id = data.Id,
-                        Brand = data.Brand,
-                        CarNumber = data.CarNumber,
-                        Model = data.Model,
-                        Year = data.Year,
-                        Distance = data.Distance,   
-                        Photo = data.Photo,
-                        Price = data.Price,
-                        EnginePower = data.EnginePower,
-                        ElectricPower = data.ElectricPower,
-                        State = data.State,
-                        VehicleType = "0"
-                    };
+                    builder = new HybridCarBuilder().SetElectricPower(data.ElectricPower);
                     break;
                 case "3":
-                    newData = new ElectricMotorcycle
-                    {
-                        Id = data.Id,
-                        Brand = data.Brand,
-                        CarNumber = data.CarNumber,
-                        Model = data.Model,
-                        Year = data.Year,
-                        Distance = data.Distance,
-                        Photo = data.Photo,
-                        Price = data.Price,
-                        EnginePower = data.EnginePower,
-                        BatteryCapacity = data.BatteryCapacity,
-                        State = data.State,
-                        VehicleType = "3"
-                    };
+                    builder = new ElectricMotorcycleBuilder().SetElectricCapacity(data.BatteryCapacity);
                     break;
                 case "4":
-                    newData = new CombustionMotorcycle
-                    {
-                        Id = data.Id,
-                        Brand = data.Brand,
-                        CarNumber = data.CarNumber,
-                        Model = data.Model,
-                        Year = data.Year,
-                        Distance = data.Distance,
-                        Photo = data.Photo,
-                        Price = data.Price,
-                        EnginePower = data.EnginePower,
-                        State = data.State,
-                        VehicleType = "4"
-                    };
+                    builder = new CombustionMotorcycleBuilder();
                     break;
                 default:
                     throw new ArgumentException("Unsupported vehicle type.");
             }
 
+            IVehicle newData = builder
+                .SetId(data.Id)
+                .SetBrand(data.Brand)
+                .SetCarNumber(data.CarNumber)
+                .SetModel(data.Model)
+                .SetYear(data.Year)
+                .SetDistance(data.Distance)
+                .SetPhoto(data.Photo)
+                .SetPrice(data.Price)
+                .SetEnginePower(data.EnginePower)
+                .SetState(data.State)
+                .SetVehicleType(data.VehicleType)
+                .Build();
+
             _carRentalFacade.AddVehicleData(newData, data.VehicleType);
         }
+
     }
 }

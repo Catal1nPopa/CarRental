@@ -12,18 +12,18 @@ namespace CarRentail.Application.DBRequests
 {
     public class AddCarInspection
     {
-        public static void AddInspectionBasic(IVehicleRepository vehicleRepository, IVehicleInspectionService caInspectionService, CarInspection carInspection, CarInspectionEnum type)
+        public static void AddInspectionBasic(IVehicleRepository vehicleRepository, IVehicleInspectionService caInspectionService, CarInspection carInspection, bool type)
         {
             switch (type)
             {
-                case CarInspectionEnum.Basic:
+                case false:
                     var serviceManager = new VehicleInspectionManager(caInspectionService);
                     var result = serviceManager.PerformBasicInspection();
                     carInspection.Description = result;
                     carInspection.Advanced = false;
                     vehicleRepository.AddCarInspection(carInspection);
                     break;
-                case CarInspectionEnum.Advanced:
+                case true:
                     var serviceManagerAdvanced = new VehicleInspectionManager(caInspectionService);
                     var resultAdvanced = serviceManagerAdvanced.PerformAdvancedInspection();
                     carInspection.Description = resultAdvanced;
