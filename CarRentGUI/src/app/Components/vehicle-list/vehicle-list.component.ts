@@ -17,7 +17,7 @@ export class VehicleListComponent implements OnInit {
   userId: number = 0;
 
   vehicleFilter = '';
-
+  onlyAvailable: boolean = false;
 
   constructor(private vehicleService: VehicleService,
     private rentService: RentalsService,

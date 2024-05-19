@@ -23,7 +23,6 @@ namespace CarRentail.Application.Decorator
 
         public string PerformAdvancedInspection()
         {
-            // Decorarea serviciului cu verificări avansate
             _inspectionService = new AdvancedInspectionServiceDecorator(_inspectionService);
             return _inspectionService.Inspect();
         }
