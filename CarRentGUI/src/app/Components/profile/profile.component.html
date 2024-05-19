@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container" *ngIf="userRole === 'client'">
         <input type="text" placeholder="Căutare arendă" [(ngModel)]="rentalFilter" class="form-control mb-2">
         <div *ngIf="rentals.length">
             <h3>Închirieri</h3>

@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit{
   rentals: any[] = [];
   customerId: number = 0;
   clientData: any;
+  userRole: string = '';
 
   rentalFilter = '';
 
@@ -38,7 +39,7 @@ export class ProfileComponent implements OnInit{
   fetchRentals(id: number) {
     this.rentalsService.getRentalsCustomer(id).subscribe(data => {
       this.rentals = data;
-      console.log(this.rentals);
+      console.log(this.userRole);
     });
   }
 
@@ -56,14 +57,17 @@ export class ProfileComponent implements OnInit{
   updatePassword(): any {
     console.log("component");
     this.profileService.changePassword(this.updatePass).subscribe((res : any) => {
-      console.log(res);
-    })
+      this.toast.success({detail:"Success",summary:'Actualizare parolă cu succes',sticky:true});
+    },error => {
+      this.toast.error({detail:"ERROR",summary:'Eroare la modificare parolă',sticky:true});
+    });
   }
 
   getUser(){
     const userId = this.loginService.getUserIdFromToken();
     const name = this.loginService.getUserName();
     const role = this.loginService.getUserRole();
+    this.userRole = role;
     this.updatePhone.id = userId;
     this.updatePass.id = userId;
     this.updatePass.username = name;
