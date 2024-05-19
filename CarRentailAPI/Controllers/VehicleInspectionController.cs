@@ -1,6 +1,7 @@
 ﻿using CarRentail.Domain.Entities;
 using CarRentail.Domain.Enums;
 using CarRentail.Domain.Interface;
+using CarRentailAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRentailAPI.Controllers
@@ -16,13 +17,13 @@ namespace CarRentailAPI.Controllers
             _carRentalFacade = carRentalFacade;
         }
 
-        [HttpPost("CreateCarInspection - Decorator")]
-        public void AddInspection(string carNumber, DateTime dateTime, CarInspectionEnum type)
+        [HttpPost("CreateInspection")]
+        public void AddInspection([FromBody] CreateInspection createInspection)
         {
             CarInspection carInspection = new CarInspection();
-            carInspection.CarNumber = carNumber;
-            carInspection.Date = dateTime;
-            _carRentalFacade.AddInspectionCar(carInspection, type);
+            carInspection.CarNumber = createInspection.carNumber;
+            carInspection.Date = createInspection.dateTime;
+            _carRentalFacade.AddInspectionCar(carInspection, createInspection.advanceInspection);
         }
 
         [HttpGet("GetInspections")]

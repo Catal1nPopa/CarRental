@@ -11,7 +11,7 @@ namespace CarRentail.Domain.Interface
         List<VehicleList> getAllVehicles();
         bool UpdateVehicles(int id, Vehicle data, VehicleType.VehicleTypes vehicleTypes);
 
-        void AddInspectionCar(CarInspection carInspection, CarInspectionEnum typeInspection);
+        void AddInspectionCar(CarInspection carInspection, bool typeInspection);
         List<CarInspection> GetAllInspectionCars();
 
         HybridCar getHybridCars(int id);

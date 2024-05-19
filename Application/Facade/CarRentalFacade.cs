@@ -64,7 +64,7 @@ namespace CarRentail.Application.Facade
            return res;
         }
 
-        public void AddInspectionCar(CarInspection carInspection, CarInspectionEnum type)
+        public void AddInspectionCar(CarInspection carInspection, bool type)
         {
             AddCarInspection.AddInspectionBasic(_carRepository, _inspectionService, carInspection, type);
         }

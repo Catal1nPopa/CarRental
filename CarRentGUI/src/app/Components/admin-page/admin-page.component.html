@@ -44,6 +44,31 @@
                 </div>
             </div>
 
+            <div class="container mt-5">
+                <h3>Creare Inspecție</h3>
+                <div class="table-responsive">
+                    <form [formGroup]="inspectionForm" (ngSubmit)="onSubmit()">
+                        <div class="mb-3">
+                            <label for="carNumber" class="form-label">Car Number:</label>
+                            <input type="text" id="carNumber" formControlName="carNumber" class="form-control">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date:</label>
+                            <input type="date" id="date" type="date" formControlName="date" class="form-control">
+                        </div>
+                      
+                        <div class="form-check mb-3">
+                            <input id="advanceInspection" type="checkbox" formControlName="advanceInspection" class="form-check-input">
+                            <label for="advanceInspection" class="form-check-label">Advance Inspection:</label>
+                        </div>
+                      
+                        <button type="submit" class="btn btn-outline-success" [disabled]="inspectionForm.invalid">Submit</button>
+                    </form>
+                </div>
+            </div>
+            
+
             <div style="padding-top: 5%;">
                 <h3>Inspecții vehicol</h3>
                 <div class="table-responsive">
@@ -78,7 +103,7 @@
 
 
 
-        <div style="padding-top: 5%;">
+        <div style="padding-top: 5%; padding-bottom: 2%;">
             <h3>Caută vehicol</h3>
             <form (ngSubmit)="getVehicle()" #carForm="ngForm" class="form-inline">
                 <div class="form-group">
@@ -91,10 +116,12 @@
                     <input type="text" class="form-control" id="typeVehicle" name="typeVehicle"
                         [(ngModel)]="typeVehicle" required>
                 </div>
+                <div>
+                    <button class="btn btn-outline-success" (click)="getVehicle()" style="margin-top: 1%;">Caută</button>
+                </div>
             </form>
 
 
-            <button class="btn btn-success" (click)="getVehicle()" style="margin-top: 1%;">Caută</button>
             <div *ngIf="vehicle.vehicleType === '0'">
                 <img [src]="convertToBase64(vehicle.photo)" alt="{{ vehicle.brand }} Image"
                     class="img-fluid mb-2 img_x">
