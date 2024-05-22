@@ -47,7 +47,7 @@ namespace CarRentail.Application.Mediator
                     dataRent.StarTime = DateTime.Today;
                     dataRent.EndTime = DateTime.Today.AddDays(dataRental.rentalDays);
                     dataRent.TotalPrice = await _mediator.Send(new GetStrategyPriceRequest(dataRental.rentalDays));
-
+                    
                     await _mediator.Send(dataRent);
 
                     UpdateVehicleStatusRequest dataUpdate = new UpdateVehicleStatusRequest();
@@ -55,6 +55,8 @@ namespace CarRentail.Application.Mediator
                     dataUpdate.vehicleTypes = dataRental.vehicleTypes;
 
                     await _mediator.Send(dataUpdate);
+
+                    await SendEmail.SendEmailConfirmation(dataRental, checkResponse, dataRent, _mediator);
                     return true;
             }
             return false;
